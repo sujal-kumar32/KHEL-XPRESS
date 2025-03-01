@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>khelXPRESS</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="icon" href="{% static 'images/Black.png' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="app_link">
+          <a href="">Hello {{request.user}}</a>
+        </div>
+        <div class="nav_items">
+          <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">Tournaments</a></li>
+            <li><a href="">Sports</a></li>
+            <li><a href="">Organize</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Sign Up</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <div class="content_wrapper">
+        <h1>khelXPRESS</h1>
+        <h4>UttarPradesh</h4>
+        <h2>Find your <b>Passion</b> to win public <b>Emotions</b>.</h2>
+        <div class="search_container">
+          <!--<i class="fa-solid fa-location-dot"></i>-->
+          <form>
+            <input type="text" placeholder="District name" />
+            <button type="submit" class="btn"><b>Search</b></button>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="sport_section">
+      <div class="sports">
+        <div class="types">
+          <a href="">
+            <img src="{% static 'images/spotr.jpg' %}" alt="indoor-outdoor" />
+          </a>
+          <div class="content">
+            <p class="heding">Sports</p>
+            <p class="text">Register in your passion</p>
+          </div>
+        </div>
+
+        <div class="types">
+          <a href="">
+            <img src="{% static 'images/esports.jpg' %}" alt="esports" />
+          </a>
+          <div class="content">
+            <p class="heding">e-Sports</p>
+            <p class="text">Play and win big prizes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

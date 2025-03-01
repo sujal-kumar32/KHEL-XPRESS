@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(202, 55, 55);
+}
+header {
+  background: url("../images/round.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  min-height: 450px;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  height: 70px;
+  margin: 0 auto;
+}
+nav .app_link a {
+  text-decoration: none;
+  color: aliceblue;
+  font-weight: 400;
+  font-size: small;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+nav .nav_items ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+nav .nav_items ul li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+nav .nav_items ul li a {
+  text-decoration: none;
+  color: aliceblue;
+  margin: 0 20px;
+}
+
+nav ul li:last-child a {
+  background-color: #007bff;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li:last-child a:hover {
+  background-color: #0056b3;
+}
+.content_wrapper {
+  color: white;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+.content_wrapper h1 {
+  font-size: 70px;
+  height: 100px;
+}
+.content_wrapper h4 {
+  color: yellow;
+  letter-spacing: 4px;
+}
+.content_wrapper h2 {
+  font-size: 30px;
+  margin: 20px 0;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+.search_container {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  height: 3.5rem;
+  width: 40%;
+  border-radius: 9px;
+}
+.search_container form {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  max-width: 600px; /* FIXED */
+}
+.search_container form input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  width: 100%;
+  font-size: 16px;
+  padding-left: 10px;
+}
+.search_container form .btn {
+  color: #0056b3;
+  font-size: 14px;
+  padding: 10px 30px;
+}
+
+.search_container button {
+  background: white;
+  border: 1px solid #de3131d0;
+}
+
+.search_container button:hover {
+  background: #de3131d0;
+}
+/*............................Sports Choose Section ............................*/
+.sport_section {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sport_section .sports {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 4%;
+  margin-bottom: 40px;
+}
+
+.sports .types {
+  width: 30%;
+  min-width: 280px; /* FIXED */
+  border-radius: 8px;
+  border: 1px solid grey;
+  transition: transform 0.5s;
+  overflow: hidden;
+}
+
+.sports .types a img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.sports .types:hover {
+  transform: scale(1.1);
+}
