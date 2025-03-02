@@ -1,13 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 body {
   width: 100vw;
   height: 100vh;
-  background: rgb(202, 55, 55);
+  background: white;
 }
 header {
   background: url("../images/round.jpg");
@@ -16,6 +18,10 @@ header {
   background-size: cover;
   width: 100%;
   min-height: 450px;
+
+  /* Makes only the image opaque */
+  background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+  background-blend-mode: darken; /* Blend image with the overlay */
 }
 nav {
   display: flex;
@@ -25,12 +31,10 @@ nav {
   height: 70px;
   margin: 0 auto;
 }
-nav .app_link a {
-  text-decoration: none;
-  color: aliceblue;
-  font-weight: 400;
-  font-size: small;
-  font-family: Georgia, "Times New Roman", Times, serif;
+nav .app_link p {
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
 }
 nav .nav_items ul {
   display: flex;
@@ -50,16 +54,22 @@ nav .nav_items ul li a {
 }
 
 nav ul li:last-child a {
-  background-color: #007bff;
+  background-color: rgba(255, 255, 255, 0.4);
   color: white;
+  width: 95px;
+  height: 40px;
+  font-weight: 500;
   padding: 7px 15px;
-  border-radius: 5px;
+  border: none;
+  border-radius: 30px;
   text-decoration: none;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
 nav ul li:last-child a:hover {
-  background-color: #0056b3;
+  background: rgba(255, 255, 255, 0.3);
 }
 .content_wrapper {
   color: white;
@@ -76,8 +86,19 @@ nav ul li:last-child a:hover {
   height: 100px;
 }
 .content_wrapper h4 {
-  color: yellow;
-  letter-spacing: 4px;
+  font-size: 30px;
+  font-weight: bold;
+  background: linear-gradient(
+    to bottom,
+    #ff9933 33%,
+    #ffffff 33%,
+    #ffffff 66%,
+    #138808 66%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
 }
 .content_wrapper h2 {
   font-size: 30px;
@@ -159,4 +180,154 @@ nav ul li:last-child a:hover {
 
 .sports .types:hover {
   transform: scale(1.1);
+}
+
+.messages {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
+}
+
+.alert {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.alert-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.alert-error {
+  background-color: #f44336;
+  color: white;
+}
+
+.close {
+  margin-left: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* ... Previous CSS ... */
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    height: auto;
+    padding: 15px 0;
+  }
+
+  nav .app_link {
+    margin-bottom: 15px;
+  }
+
+  nav .nav_items ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav .nav_items ul li {
+    margin: 5px 10px;
+  }
+
+  .content_wrapper h1 {
+    font-size: 50px;
+    height: auto;
+    margin: 20px 0;
+  }
+
+  .content_wrapper h4 {
+    font-size: 24px;
+  }
+
+  .content_wrapper h2 {
+    font-size: 22px;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .search_container {
+    width: 70%;
+    height: 50px;
+  }
+
+  .sports .types {
+    width: 45%;
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav .nav_items ul li a {
+    margin: 0 8px;
+    font-size: 14px;
+  }
+
+  .content_wrapper {
+    margin-top: 30px;
+  }
+
+  .content_wrapper h1 {
+    font-size: 36px;
+  }
+
+  .content_wrapper h4 {
+    font-size: 20px;
+  }
+
+  .content_wrapper h2 {
+    font-size: 18px;
+    letter-spacing: normal;
+  }
+
+  .search_container {
+    width: 90%;
+    height: 45px;
+  }
+
+  .search_container form input {
+    font-size: 14px;
+  }
+
+  .search_container form .btn {
+    padding: 8px 20px;
+  }
+
+  .sports .types {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .messages {
+    width: 95%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 360px) {
+  nav .nav_items ul li {
+    margin: 5px;
+  }
+
+  nav .nav_items ul li a {
+    font-size: 13px;
+    margin: 0 5px;
+  }
+
+  .content_wrapper h1 {
+    font-size: 32px;
+  }
+
+  .search_container {
+    height: 40px;
+  }
 }

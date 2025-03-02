@@ -36,16 +36,30 @@ def register_view(request):
         # Combine First Name & Last Name to create a Username
         username = f"{first_name}{last_name}".lower()
 
+        if not first_name or not last_name or not email or not password:
+            messages.error(request, "All fields are required.")
+            return redirect("login")
+        
         # Check if user already exists
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already taken. Try a different one.")
-            return redirect("register")
+            return redirect("login")
 
+
+
+        # Check if email already exists
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already registered. Try logging in.")
+            return redirect("login")
+        
         # Create the user
         user = User.objects.create_user(username=username, email=email, password=password)
         user.first_name = first_name
         user.last_name = last_name
         user.save()
+
+                # Auto-login after registration
+        user = authenticate(request, username=username, password=password)
 
         # Auto-login after registration
         user = authenticate(request, username=username, password=password)

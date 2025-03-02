@@ -21,7 +21,7 @@ from khelxpress.views import *
 import khelxpress.views as views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/',home),
+    path('', views.home, name='home'),
     path('',home),
     path('login/', login_view, name='login'),
      path("register/", register_view, name="register"),

@@ -10,9 +10,22 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'css/login.css' %}" />
-    <title>Ludiflex | Login & Registration</title>
+    <title>khelXPRESS | Login & Registration</title>
   </head>
   <body>
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+        <span class="close" onclick="this.parentElement.style.display='none'"
+          >&times;</span
+        >
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="wrapper">
       <nav class="nav">
         <div class="nav-logo">
@@ -20,7 +33,7 @@
         </div>
         <div class="nav-menu" id="navMenu">
           <ul>
-            <li><a href="#" class="link active">Home</a></li>
+            <li><a href="{% url 'home' %}" class="link active">Home</a></li>
             <li><a href="#" class="link">Tournaments</a></li>
             <li><a href="#" class="link">Sports</a></li>
             <li><a href="#" class="link">Organize</a></li>
@@ -91,7 +104,7 @@
           <div class="top">
             <header>Sign Up</header>
           </div>
-          <form action="{% url 'register' %}" method="post">
+          <form action="" method="post">
             {% csrf_token %}
             <div class="two-forms">
               <div class="input-box">
@@ -189,6 +202,17 @@
         x.style.opacity = 0;
         y.style.opacity = 1;
       }
+
+      // Auto-hide messages after 3 seconds
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          let alerts = document.querySelectorAll(".alert");
+          alerts.forEach((alert) => {
+            alert.style.animation = "fadeOut 0.5s ease-out forwards";
+            setTimeout(() => alert.remove(), 500); // Remove element after animation
+          });
+        }, 3000);
+      });
     </script>
   </body>
 </html>
