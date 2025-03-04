@@ -104,7 +104,7 @@
           <div class="top">
             <header>Sign Up</header>
           </div>
-          <form action="" method="post">
+          <form action="{% url 'register' %}" method="post">
             {% csrf_token %}
             <div class="two-forms">
               <div class="input-box">
