@@ -19,9 +19,8 @@ header {
   width: 100%;
   min-height: 450px;
 
-  
-  background-color: rgba(0, 0, 0, 0.4); 
-  background-blend-mode: darken; 
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: darken;
 }
 nav {
   display: flex;
@@ -48,18 +47,42 @@ nav .nav_items ul li {
   list-style: none;
 }
 nav .nav_items ul li a {
-  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
   color: aliceblue;
-  margin: 0 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+/* Animated underline effect */
+nav .nav_items ul li a:not(.auth-link)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: #ff435c;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+nav .nav_items ul li a:not(.auth-link):hover {
+  color: #ff435c;
+  transform: translateY(-3px);
 }
 
-nav ul li:last-child a {
+nav .nav_items ul li a:not(.auth-link):hover::after {
+  width: 100%;
+}
+
+nav ul .log-button {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.4);
   color: white;
-  width: 100px;
+  width: 140px;
   height: 40px;
   font-weight: 500;
   padding: 7px 15px;
@@ -71,9 +94,20 @@ nav ul li:last-child a {
   transition: 0.3s ease;
 }
 
-nav ul li:last-child a:hover {
+nav ul .log-button:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+
+.log-button .auth-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-decoration: none;
+}
+
 .content_wrapper {
   color: white;
   width: 100%;
@@ -87,7 +121,6 @@ nav ul li:last-child a:hover {
 .content_wrapper h1 {
   font-size: 70px;
   height: 100px;
-  
 }
 .content_wrapper h4 {
   font-size: 30px;
@@ -113,12 +146,12 @@ nav ul li:last-child a:hover {
 .search_container {
   position: absolute; /* Keeps search bar on top of the image */
   top: 50%; /* Adjust as needed */
-  left: 50%;
+  left: 53%;
   transform: translate(-50%, -50%); /* Centers the search bar */
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.9);
+  background: transparent;
   height: auto;
   width: 50%;
   border-radius: 9px;
@@ -136,7 +169,7 @@ nav ul li:last-child a:hover {
 }
 
 .search_container form select {
-  background: rgba(255, 255, 255, 0.7);
+  background: snow;
   color: #333;
   padding: 10px;
   border: none;
@@ -214,72 +247,294 @@ nav ul li:last-child a:hover {
   }
 }
 
-/*............................Sports Choose Section ............................*/
-/* Responsive sports section */
-.sport_section {
-  background-color: #1e1e2f; /* Adjusted background color */
-  padding: 40px 0;
-  text-align: center;
-}
-
-.sports {
+/* Marquee Container - Ensuring Responsiveness */
+/* Marquee Container - Ensuring Responsiveness */
+.marquee_container {
+  width: 100%;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  align-items: center;
   flex-wrap: wrap;
+  margin-top: 50px; /* Increased spacing */
+  padding: 10px 0;
 }
 
-.types {
-  background: #2a2a3a;
-  border-radius: 12px;
-  overflow: hidden;
-  padding: 15px;
-  width: 300px;
-  text-align: center;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.types:hover {
-  transform: scale(1.05);
-}
-
-.types img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.content {
-  padding: 10px;
-}
-
-.heding {
-  font-size: 22px;
+/* Beautiful & Responsive Marquee */
+.marquee_text {
+  width: 85%;
+  max-width: 900px;
+  background: linear-gradient(90deg, #ff4e50, #fc913a, #f9d423);
+  color: white;
+  font-size: 18px;
+  padding: 12px 0;
   font-weight: bold;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  animation: glow 1.5s infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Glowing Effect */
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(255, 78, 80, 0.8);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(255, 78, 80, 1);
+  }
+}
+
+/* Ensure No Collision on Smaller Screens */
+@media (max-width: 768px) {
+  .marquee_container {
+    margin-top: 60px; /* Extra spacing */
+  }
+
+  .marquee_text {
+    width: 90%;
+    font-size: 16px;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .marquee_container {
+    margin-top: 70px; /* More space below search bar */
+  }
+
+  .marquee_text {
+    width: 95%;
+    font-size: 14px;
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .marquee_container {
+    margin-top: 80px; /* Ensure no overlap */
+  }
+
+  .marquee_text {
+    font-size: 12px;
+    width: 100%;
+    padding: 6px 0;
+  }
+}
+
+/*............................Sports Choose Section ............................*/
+/* Responsive sports section */
+/* Sports & eSports Sections */
+/* Overall Section */
+.sport_section {
+  background: linear-gradient(135deg, #1e1e2f, #252542);
+  padding: 60px 5%;
+}
+
+/* Sports & eSports Section */
+.sports,
+.esports {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px 0;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* Text Content */
+.sports-content,
+.esports-content {
+  width: 50%;
   color: #fff;
 }
 
-.text {
-  font-size: 16px;
-  color: #ddd;
+.sports-content h2,
+.esports-content h2 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.bottom-text {
-  font-size: 14px;
-  color: #aaa;
-  margin-top: 10px;
+.text-container {
+  background: rgba(0, 0, 0, 0.6);
+
+  padding: 20px;
+  border-radius: 8px;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.sports-content p,
+.esports-content p {
+  font-size: 16px;
+  color: #ddd;
+  margin-bottom: 5px;
+}
+
+/* CTA Button */
+.cta-button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: white;
+  background: linear-gradient(135deg, #ff7b00, #ff3d00);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 5px 15px rgba(255, 123, 0, 0.3);
+}
+
+/* Image Containers */
+.sports-image,
+.esports-image {
+  width: 40%;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sports-image img,
+.esports-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.sports-image:hover img,
+.esports-image:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+/* Animated Separator */
+.animated-separator {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #ff7b00, #ff3d00);
+  position: relative;
+  margin: 50px 0;
+  overflow: hidden;
+}
+
+.animated-separator::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0)
+  );
+  animation: glowing-line 2s linear infinite;
+}
+
+/* Animation for Glowing Effect */
+@keyframes glowing-line {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .sports,
+  .esports {
+    gap: 30px;
+  }
+
+  .sports-content h2,
+  .esports-content h2 {
+    font-size: 22px;
+  }
+
+  .sports-content p,
+  .esports-content p {
+    font-size: 15px;
+  }
+
+  .sports-image,
+  .esports-image {
+    width: 45%;
+    height: 300px;
+  }
 }
 
 @media (max-width: 768px) {
-  .sports {
+  .sports,
+  .esports {
     flex-direction: column;
-    align-items: center;
+    text-align: center;
+    gap: 20px;
   }
-  .types {
+
+  .sports-content,
+  .esports-content,
+  .sports-image,
+  .esports-image {
     width: 90%;
   }
+
+  .sports-content,
+  .esports-content {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .sports-image,
+  .esports-image {
+    height: 280px;
+  }
 }
+
+@media (max-width: 480px) {
+  .sports-content h2,
+  .esports-content h2 {
+    font-size: 20px;
+  }
+
+  .sports-content p,
+  .esports-content p {
+    font-size: 14px;
+  }
+
+  .sports-image,
+  .esports-image {
+    height: 220px;
+  }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------------------------------------------------- */
 .messages {
   position: absolute;
   top: 10px;
@@ -317,6 +572,58 @@ nav ul li:last-child a:hover {
 /* ... Previous CSS ... */
 
 /* Responsive Styles */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 200px;
+  z-index: 999;
+  background-color: rgba(255, 250, 250, 0.07);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+  display: none !important;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.show-sidebar {
+  display: flex !important;
+}
+
+.sidebar li {
+  width: 100%;
+}
+.sidebar a {
+  width: 100%;
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .hideOnMobile {
+    display: none !important;
+  }
+}
+@media (max-width: 400px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+
+.show-sidebar-icon {
+  display: none !important;
+  /* Hide by default */
+}
+
+@media (max-width: 800px) {
+  .show-sidebar-icon {
+    display: block !important; /* Show only on mobile */
+  }
+}
+
+/* ----------------------- */
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
@@ -327,16 +634,6 @@ nav ul li:last-child a:hover {
   nav .app_link {
     margin-bottom: 15px;
   }
-
-  nav .nav_items ul {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  nav .nav_items ul li {
-    margin: 5px 10px;
-  }
-
   .content_wrapper h1 {
     font-size: 50px;
     height: auto;
@@ -365,11 +662,6 @@ nav ul li:last-child a:hover {
 }
 
 @media (max-width: 480px) {
-  nav .nav_items ul li a {
-    margin: 0 8px;
-    font-size: 14px;
-  }
-
   .content_wrapper {
     margin-top: 30px;
   }
@@ -412,15 +704,6 @@ nav ul li:last-child a:hover {
 }
 
 @media (max-width: 360px) {
-  nav .nav_items ul li {
-    margin: 5px;
-  }
-
-  nav .nav_items ul li a {
-    font-size: 13px;
-    margin: 0 5px;
-  }
-
   .content_wrapper h1 {
     font-size: 32px;
   }
