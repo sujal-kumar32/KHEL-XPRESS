@@ -2,11 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+import requests
+from django.http import JsonResponse
 
 
 def home(request):
 
     return render(request, 'home.html')
+
+
+def organize_view(request):
+    return render(request, "organize.html")
 
 
 def login_view(request):
@@ -74,3 +80,4 @@ def logout_view(request):
 
 
         
+

@@ -65,7 +65,9 @@
             <li class="hideOnMobile"><a href="">Home</a></li>
             <li class="hideOnMobile"><a href="">Tournaments</a></li>
             <li class="hideOnMobile"><a href="">Sports</a></li>
-            <li class="hideOnMobile"><a href="">Organize</a></li>
+            <li class="hideOnMobile">
+              <a href="{% url 'organize' %}">Organize</a>
+            </li>
             {% if request.user.is_authenticated %}
             <li class="log-button">
               <a href="{% url 'logout' %}" class="auth-link">Logout</a>
@@ -181,12 +183,29 @@
               the chance to join tournaments, build your legacy, and become the
               champion you were born to be.
             </p>
-            <a href="#" class="cta-button">Show More</a>
+            <button id="toggleSports" class="cta-button">Show More</button>
           </div>
         </div>
+
         <div class="sports-image">
           <img src="{% static 'images/sports.jpg' %}" alt="Sports" />
         </div>
+      </div>
+
+      <div id="sportsNews" class="news-container" style="display: none">
+        <div class="news-box">🏏 Cricket League Announced!</div>
+        <div class="news-box">⚽ Football Tournament: Register Now!</div>
+        <div class="news-box">🏀 Basketball Championship Upcoming</div>
+        <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+        <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+      </div>
+
+      <div id="sportsEvent" class="event-container" style="display: none">
+        <div class="event-box">🏏 Cricket League Announced!</div>
+        <div class="event-box">⚽ Football Tournament: Register Now!</div>
+        <div class="event-box">🏀 Basketball Championship Upcoming</div>
+        <div class="event-box">🎾 Tennis Open Championship: Get Ready</div>
+        <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
       </div>
 
       <!-- Animated Separator -->
@@ -209,10 +228,29 @@
               waiting for you. Compete against top players, stream your
               gameplay, and win BIG cash prizes in epic online battles.
             </p>
-            <a href="#" class="cta-button">Show More</a>
+            <button id="toggleEsports" class="cta-button">Show More</button>
           </div>
         </div>
       </div>
+
+      <div id="esportsNews" class="news-container" style="display: none">
+        <div class="news-box">🎮 Valorant Tournament Starts Soon!</div>
+        <div class="news-box">🕹️ Fortnite Battle Royale: Register Now!</div>
+        <div class="news-box">🔥 CS:GO Global Championship Announced</div>
+        <div class="news-box">⚡ Dota 2 International: Get Ready!</div>
+        <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+      </div>
+
+      <div id="esportsEvent" class="event-container" style="display: none">
+        <div class="event-box">🏏 Cricket League Announced!</div>
+        <div class="event-box">⚽ Football Tournament: Register Now!</div>
+        <div class="event-box">🏀 Basketball Championship Upcoming</div>
+        <div class="event-box">🎾 Tennis Open Championship: Get Ready</div>
+        <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+      </div>
+
+      <!-- Animated Separator -->
+      <div class="animated-separator"></div>
     </div>
 
     <script>
@@ -401,6 +439,25 @@
           });
         }
       }
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function toggleSection(buttonId, newsId, eventId) {
+          const button = document.getElementById(buttonId);
+          const newsSection = document.getElementById(newsId);
+          const eventSection = document.getElementById(eventId);
+
+          button.addEventListener("click", function () {
+            const isHidden = newsSection.style.display === "none";
+            newsSection.style.display = isHidden ? "grid" : "none";
+            eventSection.style.display = isHidden ? "grid" : "none";
+            button.textContent = isHidden ? "Show Less" : "Show More";
+          });
+        }
+
+        toggleSection("toggleSports", "sportsNews", "sportsEvent");
+        toggleSection("toggleEsports", "esportsNews", "esportsEvent");
+      });
     </script>
   </body>
 </html>
