@@ -79,8 +79,8 @@ WSGI_APPLICATION = 'khel_xpress.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'khel_xpress',
-        'PASSWORD': "@sujalkumar#",
+        'NAME': 'tits',
+        'PASSWORD': "RS@1234",
         'USER':'root',
         'HOST':'localhost',
     }
