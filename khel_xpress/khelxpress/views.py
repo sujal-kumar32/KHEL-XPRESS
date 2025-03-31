@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 import requests
 from django.http import JsonResponse
+from django.core.mail import send_mail
+import json
+import re
 
 
 def home(request):
@@ -79,5 +82,31 @@ def logout_view(request):
 
 
 
-        
 
+def subscribe(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            email = data.get("email")
+
+            # Validate email format
+            email_pattern = r"^[^\s@]+@[^\s@]+\.[^\s@]+$"
+            if not email or not re.match(email_pattern, email):
+                return JsonResponse({"message": "Invalid email format!"}, status=400)
+
+            # Sending confirmation email
+            send_mail(
+                "Subscription Successful",
+                "Thank you for subscribing to our newsletter!",
+                "sujalstark12345@gmail.com",  # Change this to your email
+                [email],
+                fail_silently=False,
+            )
+
+            return JsonResponse({"message": "Subscription successful! Check your email."})
+
+        except Exception as e:
+            print(f"DEBUG ERROR: {e}")  # Debug print to see error in terminal
+            return JsonResponse({"message": f"Internal Error: {str(e)}"}, status=500)
+
+    return JsonResponse({"message": "Invalid request"}, status=400)

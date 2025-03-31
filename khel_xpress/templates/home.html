@@ -373,7 +373,8 @@
         <div class="footer-section">
           <h3>Newsletter</h3>
           <p>Subscribe for the latest gaming news & updates.</p>
-          <form action="#" class="newsletter">
+          <form action="#" class="newsletter" id="subscribeForm">
+            {% csrf_token %}
             <input
               type="email"
               id="email"
@@ -664,19 +665,44 @@
           });
         });
       });
-
+    </script>
+    <script>
       document
         .querySelector(".newsletter")
-        .addEventListener("submit", function (e) {
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
           let email = document.querySelector("#email").value;
           let errorText = document.querySelector("#email-error");
           let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          let csrfToken = document.querySelector(
+            "[name=csrfmiddlewaretoken]"
+          ).value;
 
           if (!emailPattern.test(email)) {
-            e.preventDefault();
             errorText.textContent = "Please enter a valid email address!";
+            errorText.style.color = "red";
+            return;
           } else {
             errorText.textContent = "";
+          }
+
+          try {
+            const response = await fetch("{% url 'subscribe' %}", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+              },
+              body: JSON.stringify({ email: email }),
+            });
+
+            const data = await response.json();
+            errorText.textContent = data.message;
+            errorText.style.color = response.ok ? "green" : "red"; // Green for success, Red for error
+          } catch (error) {
+            errorText.textContent = "Error: Could not subscribe.";
+            errorText.style.color = "red";
           }
         });
     </script>

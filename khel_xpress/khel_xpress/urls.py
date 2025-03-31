@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from khelxpress.views import *
 
+
 import khelxpress.views as views
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +29,7 @@ urlpatterns = [
     path("register/", register_view, name="register"),
     path('logout/', logout_view, name='logout'),
     path('organize/', organize_view, name='organize'),
+    path("subscribe/", subscribe, name="subscribe"),
 
       
     
