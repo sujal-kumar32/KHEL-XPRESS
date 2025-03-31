@@ -66,7 +66,10 @@
             <li class="hideOnMobile"><a href="">Tournaments</a></li>
             <li class="hideOnMobile"><a href="">Sports</a></li>
             <li class="hideOnMobile">
-              <a href="{% url 'organize' %}">Organize</a>
+              <a
+                href="{% if request.user.is_authenticated %}{% url 'organize' %}{% else %}{% url 'login' %}{% endif %}"
+                >Organize</a
+              >
             </li>
             {% if request.user.is_authenticated %}
             <li class="log-button">
@@ -191,22 +194,31 @@
           <img src="{% static 'images/sports.jpg' %}" alt="Sports" />
         </div>
       </div>
-
-      <div id="sportsNews" class="news-container" style="display: none">
-        <div class="news-box">🏏 Cricket League Announced!</div>
-        <div class="news-box">⚽ Football Tournament: Register Now!</div>
-        <div class="news-box">🏀 Basketball Championship Upcoming</div>
-        <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
-        <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
-      </div>
-
-      <div id="sportsEvent" class="event-container" style="display: none">
-        <div class="event-box">🏏 Cricket League Announced!</div>
-        <div class="event-box">⚽ Football Tournament: Register Now!</div>
-        <div class="event-box">🏀 Basketball Championship Upcoming</div>
-        <div class="event-box">🎾 Tennis Open Championship: Get Ready</div>
-        <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
-      </div>
+      <h2 id="sportsNewsHeading" style="display: none">SPORTS-NEWS</h2>
+      <a
+        class="link"
+        href="{% if request.user.is_authenticated %}#{% else %}{% url 'login' %}{% endif %}"
+        ><div id="sportsNews" class="news-container" style="display: none">
+          <div class="news-box">🏏 Cricket League Announced!</div>
+          <div class="news-box">⚽ Football Tournament: Register Now!</div>
+          <div class="news-box">🏀 Basketball Championship Upcoming</div>
+          <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+          <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+        </div>
+      </a>
+      <h2 id="sportsEventHeading" style="display: none">SPORTS-EVENT</h2>
+      <a
+        class="link"
+        href="{% if request.user.is_authenticated %}#{% else %}{% url 'login' %}{% endif %}"
+      >
+        <div id="sportsEvent" class="event-container" style="display: none">
+          <div class="event-box">🏏 Cricket League Announced!</div>
+          <div class="event-box">⚽ Football Tournament: Register Now!</div>
+          <div class="event-box">🏀 Basketball Championship Upcoming</div>
+          <div class="event-box">🎾 Tennis Open Championship: Get Ready</div>
+          <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+        </div>
+      </a>
 
       <!-- Animated Separator -->
       <div class="animated-separator"></div>
@@ -232,26 +244,167 @@
           </div>
         </div>
       </div>
-
-      <div id="esportsNews" class="news-container" style="display: none">
-        <div class="news-box">🎮 Valorant Tournament Starts Soon!</div>
-        <div class="news-box">🕹️ Fortnite Battle Royale: Register Now!</div>
-        <div class="news-box">🔥 CS:GO Global Championship Announced</div>
-        <div class="news-box">⚡ Dota 2 International: Get Ready!</div>
-        <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
-      </div>
-
-      <div id="esportsEvent" class="event-container" style="display: none">
-        <div class="event-box">🏏 Cricket League Announced!</div>
-        <div class="event-box">⚽ Football Tournament: Register Now!</div>
-        <div class="event-box">🏀 Basketball Championship Upcoming</div>
-        <div class="event-box">🎾 Tennis Open Championship: Get Ready</div>
-        <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
-      </div>
+      <h2 id="esportsNewsHeading" style="display: none">ESPORTS-NEWS</h2>
+      <a
+        class="link"
+        href="{% if request.user.is_authenticated %}#{% else %}{% url 'login' %}{% endif %}"
+      >
+        <div id="esportsNews" class="news-container" style="display: none">
+          <div class="news-box">🎮 Valorant Tournament Starts Soon!</div>
+          <div class="news-box">🕹️ Fortnite Battle Royale: Register Now!</div>
+          <div class="news-box">🔥 CS:GO Global Championship Announced</div>
+          <div class="news-box">⚡ Dota 2 International: Get Ready!</div>
+          <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+        </div>
+      </a>
+      <h2 id="esportsEventHeading" style="display: none">ESPORTS-EVENT</h2>
+      <a
+        class="link"
+        href="{% if request.user.is_authenticated %}#{% else %}{% url 'login' %}{% endif %}"
+      >
+        <div id="esportsEvent" class="event-container" style="display: none">
+          <div class="event-box">🏏 Cricket League Announced!</div>
+          <div class="event-box">⚽ Football Tournament: Register Now!</div>
+          <div class="event-box">🏀 Basketball Championship Upcoming</div>
+          <div class="event-box">🎾 Tennis Open Championship: Get Ready</div>
+          <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+        </div>
+      </a>
 
       <!-- Animated Separator -->
       <div class="animated-separator"></div>
+
+      {% comment %}
+      -----------------------------------------------------------------------------------------------------------------------
+      {% endcomment %}
+      <section id="faq" class="faq-section">
+        <div class="faq-header">
+          <h2 class="faq-title">Frequently Asked Questions</h2>
+          <p class="faq-subtitle">
+            Find answers to common queries about <span>Khel-Xpress</span> and
+            enhance your experience.
+          </p>
+        </div>
+
+        <div class="faq-container">
+          <div class="faq-item">
+            <button class="faq-question">
+              ❓ What is Khel-Xpress?
+              <span class="toggle-icon">➕</span>
+            </button>
+            <div class="faq-answer">
+              Khel-Xpress is a sports and esports platform where players can
+              interact, share videos/photos, and organize events.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              📌 How can I register for an event?
+              <span class="toggle-icon">➕</span>
+            </button>
+            <div class="faq-answer">
+              Go to the "Events" section, select your event, and follow the
+              registration instructions.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              🔐 Do I need an account to participate?
+              <span class="toggle-icon">➕</span>
+            </button>
+            <div class="faq-answer">
+              Yes, you must create an account to join events, post content, and
+              interact with other players.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              📹 Can I upload match highlights?
+              <span class="toggle-icon">➕</span>
+            </button>
+            <div class="faq-answer">
+              Yes! You can upload match highlights, photos, and videos to share
+              with the community.
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
+
+    {% comment %}
+    --------------------------------------------------------------------------------------------------------------------------------------
+    {% endcomment %}
+
+    <!-- footer.html -->
+    <!-- footer.html -->
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Logo & About -->
+        <div class="footer-section logo-section">
+          <h2>Khel-Xpress</h2>
+          <p>Where gamers connect, compete, and conquer!</p>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Tournaments</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <p>Subscribe for the latest gaming news & updates.</p>
+          <form action="#" class="newsletter">
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+            <button type="submit">Subscribe</button>
+            <p id="email-error"></p>
+          </form>
+        </div>
+
+        <!-- Social Media & App Links -->
+        <div class="footer-section social-media">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#" class="icon fb">F</a>
+            <a href="#" class="icon ig">I</a>
+            <a href="#" class="icon tw">T</a>
+            <a href="#" class="icon yt">Y</a>
+          </div>
+          <h3>Get the App</h3>
+          <div class="app-buttons">
+            <a href="#" class="app-button">📱 App Store</a>
+            <a href="#" class="app-button">📱 Google Play</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <p class="footer-bottom">© 2025 Khel-Xpress. All rights reserved.</p>
+    </footer>
 
     <script>
       function showSidebar() {
@@ -442,22 +595,90 @@
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function toggleSection(buttonId, newsId, eventId) {
+        function toggleSection(
+          buttonId,
+          newsId,
+          eventId,
+          newsHeadingId,
+          eventHeadingId
+        ) {
           const button = document.getElementById(buttonId);
           const newsSection = document.getElementById(newsId);
           const eventSection = document.getElementById(eventId);
+          const newsHeading = document.getElementById(newsHeadingId);
+          const eventHeading = document.getElementById(eventHeadingId);
 
           button.addEventListener("click", function () {
             const isHidden = newsSection.style.display === "none";
             newsSection.style.display = isHidden ? "grid" : "none";
             eventSection.style.display = isHidden ? "grid" : "none";
+            newsHeading.style.display = isHidden ? "block" : "none";
+            eventHeading.style.display = isHidden ? "block" : "none";
             button.textContent = isHidden ? "Show Less" : "Show More";
           });
         }
 
-        toggleSection("toggleSports", "sportsNews", "sportsEvent");
-        toggleSection("toggleEsports", "esportsNews", "esportsEvent");
+        toggleSection(
+          "toggleSports",
+          "sportsNews",
+          "sportsEvent",
+          "sportsNewsHeading",
+          "sportsEventHeading"
+        );
+        toggleSection(
+          "toggleEsports",
+          "esportsNews",
+          "esportsEvent",
+          "esportsNewsHeading",
+          "esportsEventHeading"
+        );
       });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach((item) => {
+          const question = item.querySelector(".faq-question");
+          const answer = item.querySelector(".faq-answer");
+          const icon = item.querySelector(".toggle-icon");
+
+          question.addEventListener("click", function () {
+            const isOpen = answer.classList.contains("show");
+
+            // Close all FAQs
+            document.querySelectorAll(".faq-answer").forEach((ans) => {
+              ans.classList.remove("show");
+              ans.style.display = "none";
+            });
+            document.querySelectorAll(".toggle-icon").forEach((icon) => {
+              icon.textContent = "➕";
+            });
+
+            // Toggle the clicked FAQ
+            if (!isOpen) {
+              answer.classList.add("show");
+              answer.style.display = "block";
+              icon.textContent = "➖";
+            }
+          });
+        });
+      });
+
+      document
+        .querySelector(".newsletter")
+        .addEventListener("submit", function (e) {
+          let email = document.querySelector("#email").value;
+          let errorText = document.querySelector("#email-error");
+          let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (!emailPattern.test(email)) {
+            e.preventDefault();
+            errorText.textContent = "Please enter a valid email address!";
+          } else {
+            errorText.textContent = "";
+          }
+        });
     </script>
   </body>
 </html>
