@@ -30,6 +30,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('organize/', organize_view, name='organize'),
     path("subscribe/", subscribe, name="subscribe"),
+    path('api/', include('locations.urls')),
 
       
     

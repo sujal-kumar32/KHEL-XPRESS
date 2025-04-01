@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'khelxpress',
+    'locations',
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "sujalstark12345@gmail.com"  # Your email
 EMAIL_HOST_PASSWORD = "xnrh yctg xprn hdwq"  # Use App Password for security
+

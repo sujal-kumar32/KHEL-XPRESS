@@ -4,50 +4,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Author: suajl,sudipta,ritesh
+    about:main page of the website khelXPRESS where events and news will be shown"
+    />
+    <link rel="icon" href="{% static 'images/Black.png' %}" />
     <title>Sports Tournament Registration</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        padding: 20px;
-      }
-      .container {
-        width: 50%;
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin: auto;
-      }
-      h2 {
-        text-align: center;
-      }
-      label {
-        font-weight: bold;
-      }
-      input,
-      select,
-      textarea {
-        width: 100%;
-        padding: 8px;
-        margin: 5px 0 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-      .facilities label {
-        display: block;
-        margin-top: 10px;
-      }
-      button {
-        width: 100%;
-        padding: 10px;
-        background: #28a745;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/organize.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <div class="container">
@@ -91,15 +62,15 @@
         <label>Tournament Name:</label>
         <input type="text" placeholder="Enter Tournament Name" required />
 
-        <label>Tournament level </label>
+        <label>Tournament Level:</label>
         <select>
           <option value="">District level</option>
           <option value="">States level</option>
           <option value="">National level</option>
-          <option value="">School or Unvirestiy level</option>
+          <option value="">School or University level</option>
         </select>
 
-        <label> Name of Head Organizer :</label>
+        <label>Name of Head Organizer:</label>
         <input type="text" placeholder="Enter Name" required />
 
         <label>Phone Number:</label>
@@ -138,7 +109,7 @@
           <option value="drinks_breakfast">Only Drinks/Breakfast</option>
           <option value="lunch">Only Lunch</option>
           <option value="dinner">Only Dinner</option>
-          <option value="both">lunch and Dinner</option>
+          <option value="both">Lunch and Dinner</option>
           <option value="Not provided">Not provided</option>
         </select>
 
@@ -193,7 +164,7 @@
         <label>Team Entry:</label>
         <select>
           <option value="">Direct Entry</option>
-          <option value="">on the trial base</option>
+          <option value="">On the trial basis</option>
         </select>
 
         <button type="submit">Submit Registration</button>
@@ -217,16 +188,13 @@
           esportsSection.style.display = "none";
         }
       }
+
       function toggleEntryFeeInput() {
         var entryFee = document.getElementById("entry-fee").value;
         document.getElementById("entry-fee-amount").style.display =
           entryFee === "yes" ? "block" : "none";
       }
-      function toggleagelimitInput() {
-        var entryFee = document.getElementById("age-limit").value;
-        document.getElementById("entry-age").style.display =
-          entryFee === "yes" ? "block" : "none";
-      }
+
       function toggleAgeCategory() {
         document.getElementById("age-category").style.display =
           document.getElementById("age-limit").value === "yes"

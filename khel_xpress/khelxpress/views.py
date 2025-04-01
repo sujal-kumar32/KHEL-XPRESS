@@ -9,6 +9,7 @@ import json
 import re
 
 
+
 def home(request):
 
     return render(request, 'home.html')
