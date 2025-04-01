@@ -7,10 +7,8 @@
   font-family: "Poppins", sans-serif;
 }
 body {
-  width: 100vw;
   height: 100vh;
   background: white;
-  overflow-x: hidden;
 }
 header {
   background: url("../images/round.jpg");
