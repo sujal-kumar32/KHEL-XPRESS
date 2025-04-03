@@ -1,229 +1,242 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sports Tournament Registration</title>
     <style>
-        
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
-                padding: 20px;
-            }
-            .container {
-                width: 50%;
-                background: #fff;
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                margin: auto;
-            }
-            h2 {
-                text-align: center;
-            }
-            label {
-                font-weight: bold;
-            }
-            input, select, textarea {
-                width: 100%;
-                padding: 8px;
-                margin: 5px 0 15px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-            .facilities label {
-                display: block;
-                margin-top: 10px;
-            }
-            button {
-                width: 100%;
-                padding: 10px;
-                background: #28a745;
-                color: #fff;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-        </style>
-</head>
-<body>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+      .container {
+        width: 50%;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: auto;
+      }
+      h2 {
+        text-align: center;
+      }
+      label {
+        font-weight: bold;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .facilities label {
+        display: block;
+        margin-top: 10px;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
     <div class="container">
-        <h2>Tournament Registration Form</h2>
-        <form>
-            <label>Choose Game Type:</label>
-            <select id="type" onchange="toggleGameOptions()">
-                <option value="">Select Type</option>
-                <option value="sports">Sports</option>
-                <option value="esports">E-Sports</option>
-            </select>
+      <h2>Tournament Registration Form</h2>
+      <form>
+        <label>Choose Game Type:</label>
+        <select id="type" onchange="toggleGameOptions()">
+          <option value="">Select Type</option>
+          <option value="sports">Sports</option>
+          <option value="esports">E-Sports</option>
+        </select>
 
-            <div id="sports-section" style="display: none;">
-                <label>Select Your Sports Game:</label>
-                <select>
-                    <option value="cricket">Cricket</option>
-                    <option value="football">Football</option>
-                    <option value="basketball">Basketball</option>
-                    <option value="volleyball">Volleyball</option>
-                    <option value="hockey">Hockey</option>
-                    <option value="tennis">Tennis</option>
-                    <option value="badminton">Badminton</option>
-                    <option value="chess">Chess</option>
-                </select>
-            </div>
+        <div id="sports-section" style="display: none">
+          <label>Select Your Sports Game:</label>
+          <select>
+            <option value="cricket">Cricket</option>
+            <option value="football">Football</option>
+            <option value="basketball">Basketball</option>
+            <option value="volleyball">Volleyball</option>
+            <option value="hockey">Hockey</option>
+            <option value="tennis">Tennis</option>
+            <option value="badminton">Badminton</option>
+            <option value="chess">Chess</option>
+            <option value="running">s</option>
 
-            <div id="esports-section" style="display: none;">
-                <label>Select Your E-Sports Game:</label>
-                <select>
-                    <option value="counter_strike">Counter-Strike</option>
-                    <option value="dota_2">Dota 2</option>
-                    <option value="league_of_legends">League of Legends</option>
-                    <option value="fortnite">Fortnite</option>
-                    <option value="pubg">PUBG</option>
-                    <option value="valorant">Valorant</option>
-                    <option value="fifa">FIFA</option>
-                    <option value="call_of_duty">Call of Duty</option>
-                </select>
-            </div>
+          </select>
+        </div>
 
-            <label>Tournament Name:</label>
-            <input type="text" placeholder="Enter Tournament Name" required>
+        <div id="esports-section" style="display: none">
+          <label>Select Your E-Sports Game:</label>
+          <select>
+            <option value="counter_strike">Counter-Strike</option>
+            <option value="dota_2">Dota 2</option>
+            <option value="league_of_legends">League of Legends</option>
+            <option value="fortnite">Fortnite</option>
+            <option value="pubg">PUBG</option>
+            <option value="valorant">Valorant</option>
+            <option value="fifa">FIFA</option>
+            <option value="call_of_duty">Call of Duty</option>
+            <option value="free fire">Call of Duty</option>
 
-            <label>Tournament level </label>
-            <select>
-                <option value="">District level</option>
-                <option value="">States level</option>
-                <option value="">National level </option>
-                <option value="">School or Unvirestiy level</option>
-            </select>
+          </select>
+        </div>
 
-            <label> Name of Head Organizer :</label>
-            <input type="text" placeholder="Enter Name" required>
+        <label>Tournament Name:</label>
+        <input type="text" placeholder="Enter Tournament Name" required />
 
-            <label>Phone Number:</label>
-            <input type="text" placeholder="Enter Phone Number" required>
+        <label>Tournament level </label>
+        <select>
+          <option value="">District level</option>
+          <option value="">States level</option>
+          <option value="">National level</option>
+          <option value="">School or Unvirestiy level</option>
+        </select>
 
-            <label>Ground Name:</label>
-            <input type="text" placeholder="Enter Ground Name" required>
+        <label> Name of Head Organizer :</label>
+        <input type="text" placeholder="Enter Name" required />
 
-            <label>Number of Participating Teams:</label>
-            <input type="number" placeholder="Enter Number" required>
+        <label>Phone Number:</label>
+        <input type="text" placeholder="Enter Phone Number" required />
 
-            <h3>Address of Tournament</h3>
-            <label>State:</label>
-            <input type="text" placeholder="Enter State" required>
-            
-            <label>District:</label>
-            <input type="text" placeholder="Enter District" required>
-            
-            <label>City:</label>
-            <input type="text" placeholder="Enter City" required>
+        <label>Ground Name:</label>
+        <input type="text" placeholder="Enter Ground Name" required />
 
-            <label>Upload Tournament Poster:</label>
-            <input type="file" accept="image/*" required>
+        <label>Number of Participating Teams:</label>
+        <input type="number" placeholder="Enter Number" required />
 
-            <h3>Tournament Facilities</h3>
-            <label>Stay/Living:</label>
-            <select>
-                <option value="match_time">Only Match Time</option>
-                <option value="team_performance">According to Team Performance</option>
-            </select>
+        <h3>Address of Tournament</h3>
+        <label>State:</label>
+        <input type="text" placeholder="Enter State" required />
 
-            <label>Food:</label>
-            <select>
-                <option value="drinks_breakfast">Only Drinks/Breakfast</option>
-                <option value="lunch">Only Lunch</option>
-                <option value="dinner">Only Dinner</option>
-                <option value="both">lunch and Dinner</option>
-                <option value="Not provided">Not provided</option>
+        <label>District:</label>
+        <input type="text" placeholder="Enter District" required />
 
+        <label>City:</label>
+        <input type="text" placeholder="Enter City" required />
 
-            </select>
+        <label>Upload Tournament Poster:</label>
+        <input type="file" accept="image/*" required />
 
-            <label>Traveling Charge:</label>
-            <select>
-                <option value="one_side">One Side</option>
-                <option value="both_side">Both Sides</option>
-                <option value="Not provided">Not provided</option>
+        <h3>Tournament Facilities</h3>
+        <label>Stay/Living:</label>
+        <select>
+          <option value="match_time">Only Match Time</option>
+          <option value="team_performance">
+            According to Team Performance
+          </option>
+        </select>
 
-            </select>
+        <label>Food:</label>
+        <select>
+          <option value="drinks_breakfast">Only Drinks/Breakfast</option>
+          <option value="lunch">Only Lunch</option>
+          <option value="dinner">Only Dinner</option>
+          <option value="both">lunch and Dinner</option>
+          <option value="Not provided">Not provided</option>
+        </select>
 
-            <label>Team Dress:</label>
-            <select>
-                <option value="only_tshirt">Only T-Shirt</option>
-                <option value="tshirt_lower">Both Lower & T-Shirt</option>
-                <option value="Not provided">Not provided</option>
+        <label>Traveling Charge:</label>
+        <select>
+          <option value="one_side">One Side</option>
+          <option value="both_side">Both Sides</option>
+          <option value="Not provided">Not provided</option>
+        </select>
 
-            </select>
+        <label>Team Dress:</label>
+        <select>
+          <option value="only_tshirt">Only T-Shirt</option>
+          <option value="tshirt_lower">Both Lower & T-Shirt</option>
+          <option value="Not provided">Not provided</option>
+        </select>
 
-            <label>Entry Fee:</label>
-            <select id="entry-fee" onchange="toggleEntryFeeInput()">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
-            </select>
-            <input type="number" id="entry-fee-amount" placeholder="Enter Amount" style="display: none;">
+        <label>Entry Fee:</label>
+        <select id="entry-fee" onchange="toggleEntryFeeInput()">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+        <input
+          type="number"
+          id="entry-fee-amount"
+          placeholder="Enter Amount"
+          style="display: none"
+        />
 
-            <label>Age Limit:</label>
-            <select id="age-limit" onchange="toggleAgeCategory()">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
-            </select>
-            <select id="age-category" style="display: none;">
-                <option value="under_14">Under 14</option>
-                <option value="under_16">Under 16</option>
-                <option value="under_19">Under 19</option>
-                <option value="under_23">Under 23</option>
-            </select>
+        <label>Age Limit:</label>
+        <select id="age-limit" onchange="toggleAgeCategory()">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+        <select id="age-category" style="display: none">
+          <option value="under_14">Under 14</option>
+          <option value="under_16">Under 16</option>
+          <option value="under_19">Under 19</option>
+          <option value="under_23">Under 23</option>
+        </select>
 
-            <h3>Compulsory Details</h3>
-            <label>Upload Last Year Winner & Runner Team Image:</label>
-            <input type="file" accept="image/*" required>
-            
-            <label>Upload Ground Image:</label>
-            <input type="file" accept="image/*" required>
-            
-            <label>Upload Tournament Video:</label>
-            <input type="file" accept="video/*" required>
+        <h3>Compulsory Details</h3>
+        <label>Upload Last Year Winner & Runner Team Image:</label>
+        <input type="file" accept="image/*" required />
 
-            <label>Team Entry:</label>
-            <select>
-                <option value="">Direct Entry</option>
-                <option value="">on the trial base </option>
-            
-            </select>
-            
-            <button type="submit">Submit Registration</button>
-        </form>
+        <label>Upload Ground Image:</label>
+        <input type="file" accept="image/*" required />
+
+        <label>Upload Tournament Video:</label>
+        <input type="file" accept="video/*" required />
+
+        <label>Team Entry:</label>
+        <select>
+          <option value="">Direct Entry</option>
+          <option value="">on the trial base</option>
+        </select>
+
+        <button type="submit">Submit Registration</button>
+      </form>
     </div>
 
     <script>
-        function toggleGameOptions() {
-            var type = document.getElementById("type").value;
-            var sportsSection = document.getElementById("sports-section");
-            var esportsSection = document.getElementById("esports-section");
+      function toggleGameOptions() {
+        var type = document.getElementById("type").value;
+        var sportsSection = document.getElementById("sports-section");
+        var esportsSection = document.getElementById("esports-section");
 
-            if (type === "sports") {
-                sportsSection.style.display = "block";
-                esportsSection.style.display = "none";
-            } else if (type === "esports") {
-                sportsSection.style.display = "none";
-                esportsSection.style.display = "block";
-            } else {
-                sportsSection.style.display = "none";
-                esportsSection.style.display = "none";
-            }
+        if (type === "sports") {
+          sportsSection.style.display = "block";
+          esportsSection.style.display = "none";
+        } else if (type === "esports") {
+          sportsSection.style.display = "none";
+          esportsSection.style.display = "block";
+        } else {
+          sportsSection.style.display = "none";
+          esportsSection.style.display = "none";
         }
-        function toggleEntryFeeInput() {
-            var entryFee = document.getElementById("entry-fee").value;
-            document.getElementById("entry-fee-amount").style.display = entryFee === "yes" ? "block" : "none";
-        }
-        function toggleagelimitInput() {
-            var entryFee = document.getElementById("age-limit").value;
-            document.getElementById("entry-age").style.display = entryFee === "yes" ? "block" : "none";
-        }
-        function toggleAgeCategory() {
-            document.getElementById("age-category").style.display = document.getElementById("age-limit").value === "yes" ? "block" : "none";
-        }
+      }
+      function toggleEntryFeeInput() {
+        var entryFee = document.getElementById("entry-fee").value;
+        document.getElementById("entry-fee-amount").style.display =
+          entryFee === "yes" ? "block" : "none";
+      }
+      function toggleagelimitInput() {
+        var entryFee = document.getElementById("age-limit").value;
+        document.getElementById("entry-age").style.display =
+          entryFee === "yes" ? "block" : "none";
+      }
+      function toggleAgeCategory() {
+        document.getElementById("age-category").style.display =
+          document.getElementById("age-limit").value === "yes"
+            ? "block"
+            : "none";
+      }
     </script>
-</body>
+  </body>
 </html>
