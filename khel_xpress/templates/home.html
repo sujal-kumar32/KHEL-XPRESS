@@ -59,7 +59,12 @@
             <li><a href="">Home</a></li>
             <li><a href="">Tournaments</a></li>
             <li><a href="">Sports</a></li>
-            <li><a href="">Organize</a></li>
+            <li>
+              <a
+                href="{% if request.user.is_authenticated %}{% url 'organize' %}{% else %}{% url 'login' %}{% endif %}"
+                >Organize</a
+              >
+            </li>
           </ul>
           <ul>
             <li class="hideOnMobile"><a href="">Home</a></li>

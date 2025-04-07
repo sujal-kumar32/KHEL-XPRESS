@@ -41,7 +41,7 @@
               /></svg
           ></a>
         </li>
-        <li><a href="">Home</a></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="">Tournaments</a></li>
         <li><a href="">Sports</a></li>
         <li><a href="">Organize</a></li>
@@ -139,13 +139,16 @@
         <label>Phone Number:</label>
         <input type="text" placeholder="Enter Phone Number" required />
 
-        <label>Ground Name:</label>
+        <label>Venue Name:</label>
         <input type="text" placeholder="Enter Ground Name" required />
 
         <label>Number of Participating Teams:</label>
         <input type="number" placeholder="Enter Number" required />
 
-        <h3>Address of Tournament</h3>
+        <label>Number of Participating Indivisuals:</label>
+        <input type="number" placeholder="Enter Number" required />
+
+        <h3 style="color: #e0e0ff">Address of Tournament</h3>
         <label>State:</label>
         <input type="text" placeholder="Enter State" required />
 
@@ -158,7 +161,7 @@
         <label>Upload Tournament Poster:</label>
         <input type="file" accept="image/*" required />
 
-        <h3>Tournament Facilities</h3>
+        <h3 style="color: #e0e0ff">Tournament Facilities</h3>
         <label>Stay/Living:</label>
         <select>
           <option value="match_time">Only Match Time</option>
@@ -214,7 +217,7 @@
           <option value="under_23">Under 23</option>
         </select>
 
-        <h3>Compulsory Details</h3>
+        <h3 style="color: #e0e0ff">Compulsory Details</h3>
         <label>Upload Last Year Winner & Runner Team Image:</label>
         <input type="file" accept="image/*" required />
 
