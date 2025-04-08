@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from khelxpress.views import *
 import khelxpress.views as views
+from khelxpress import organize_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -26,7 +27,6 @@ urlpatterns = [
     path('login/', login_view, name='login'),
      path("register/", register_view, name="register"),
       path('logout/', logout_view, name='logout'),
-       path('organize/', organize_view, name='organize'),
-      
-    
+       path('organize/', organize_view, name='organize'),   
+    path('prize-form/', views.prize_form, name='prize_form'),
 ]

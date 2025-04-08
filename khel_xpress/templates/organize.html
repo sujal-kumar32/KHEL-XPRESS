@@ -71,11 +71,11 @@
             <option value="tennis">Tennis</option>
             <option value="badminton">Badminton</option>
             <option value="chess">Chess</option>
-            <option value="running">s</option>
-
+            <option value="running">running</option>
+            <option value="Kabaddi">Kabaddi</option>
+            <option value="Wrestling"></option>
           </select>
         </div>
-
         <div id="esports-section" style="display: none">
           <label>Select Your E-Sports Game:</label>
           <select>
@@ -87,7 +87,7 @@
             <option value="valorant">Valorant</option>
             <option value="fifa">FIFA</option>
             <option value="call_of_duty">Call of Duty</option>
-            <option value="free fire">Call of Duty</option>
+            <option value="free fire">free fire</option>
 
           </select>
         </div>
@@ -133,8 +133,7 @@
         <select>
           <option value="match_time">Only Match Time</option>
           <option value="team_performance">
-            According to Team Performance
-          </option>
+            According to Team Performance </option>
         </select>
 
         <label>Food:</label>
@@ -199,7 +198,13 @@
           <option value="">Direct Entry</option>
           <option value="">on the trial base</option>
         </select>
-
+        <label>Prize Details?</label>
+        <select id="prize-section" onchange="redirectToPrizePage()">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+       </form>
+       </div>
         <button type="submit">Submit Registration</button>
       </form>
     </div>
@@ -236,6 +241,12 @@
           document.getElementById("age-limit").value === "yes"
             ? "block"
             : "none";
+      }
+      function redirectToPrizePage() {
+        const choice = document.getElementById("prize-section").value;
+        if (choice === "yes") {
+          window.location.href = "{% url 'prize_form' %}";
+        }
       }
     </script>
   </body>

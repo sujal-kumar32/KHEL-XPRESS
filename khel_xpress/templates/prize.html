@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Prize Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      }
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        resize: vertical;
+      }
+      label {
+        font-weight: bold;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Prize Details Form</h2>
+      <form method="post">
+        {% load static %}
+        <label>Winner Prize:</label>
+        <textarea name="winner_prize" placeholder="Describe winner prize..." required></textarea>
+
+        <label>Runner Prize:</label>
+        <textarea name="runner_prize" placeholder="Describe runner prize..." required></textarea>
+
+        <label>Player of the Tournament:</label>
+        <textarea name="player_tournament" placeholder="Describe player of the tournament..." required></textarea>
+
+        <label>Player of the Match:</label>
+        <textarea name="player_match" placeholder="Describe player of the match..." required></textarea>
+
+        <label>other prize :</label>
+        <textarea name="other_prizes" placeholder="Mention other prizes based on your tournament..."></textarea>
+
+        <button type="submit">Submit Prize Details</button>
+      </form>
+    </div>
+  </body>
+</html>
