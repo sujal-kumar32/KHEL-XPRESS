@@ -269,3 +269,160 @@ button:active {
     font-size: 1rem;
   }
 }
+
+.footer {
+  background: linear-gradient(to right, #0f0f0f, #1a1a1a);
+  color: white;
+  padding: 40px 15px;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  width: 100%; /* Ensure full width */
+  align-self: stretch; /* Optional for flex children */
+  margin-top: 50px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1;
+  margin: 20px;
+  min-width: 200px;
+}
+
+.footer-section h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #ff4757;
+}
+
+.footer-section p {
+  font-size: 14px;
+  color: #bbb;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 8px 0;
+}
+
+.footer-section ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: white;
+}
+
+/* Newsletter */
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.newsletter input {
+  width: 80%;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.newsletter button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  background: #ff4757;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.newsletter button:hover {
+  background: #e84118;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.icon.fb:hover {
+  background-color: #1877f2;
+} /* Facebook */
+.icon.ig:hover {
+  background-color: #e4405f;
+} /* Instagram */
+.icon.tw:hover {
+  background-color: #1da1f2;
+} /* Twitter */
+.icon.yt:hover {
+  background-color: #ff0000;
+} /* YouTube */
+
+/* App Buttons */
+.app-buttons {
+  margin-top: 10px;
+}
+
+.app-button {
+  display: block;
+  padding: 8px 15px;
+  margin: 5px 0;
+  border-radius: 5px;
+  background-color: #222;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.app-button:hover {
+  background-color: #444;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  font-size: 14px;
+  margin-top: 20px;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

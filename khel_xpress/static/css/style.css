@@ -135,7 +135,7 @@ nav ul .log-button:hover {
   background-clip: text;
 
   -webkit-text-fill-color: transparent;
-  color: transparent; /* Fallback for non-WebKit browsers */
+  color: transparent;
   text-transform: uppercase;
 }
 
@@ -146,10 +146,10 @@ nav ul .log-button:hover {
   font-weight: 100;
 }
 .search_container {
-  position: absolute; /* Keeps search bar on top of the image */
-  top: 50%; /* Adjust as needed */
+  position: absolute;
+  top: 50%;
   left: 53%;
-  transform: translate(-50%, -50%); /* Centers the search bar */
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,7 +216,6 @@ nav ul .log-button:hover {
   transform: scale(1.05);
 }
 
-/* RESPONSIVE SEARCH BAR */
 @media (max-width: 768px) {
   .search_container {
     width: 80%;
@@ -345,6 +344,13 @@ nav ul .log-button:hover {
   gap: 40px;
   padding: 40px 0;
   animation: fadeInUp 1s ease-out;
+}
+.sportsNews-image {
+  width: 100%;
+  height: 100%;
+
+  border: 2px solid #ffffff;
+  object-fit: cover;
 }
 
 .link {

@@ -86,9 +86,16 @@
   <body>
     <div class="container">
       <h2>Tournament Registration Form</h2>
-      <form>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
         <label>Choose Game Type:</label>
-        <select id="type" onchange="toggleGameOptions()">
+        <select
+          id="type"
+          name="game_type"
+          onchange="toggleGameOptions()"
+          required
+        >
           <option value="">Select Type</option>
           <option value="sports">Sports</option>
           <option value="esports">E-Sports</option>
@@ -96,7 +103,7 @@
 
         <div id="sports-section" style="display: none">
           <label>Select Your Sports Game:</label>
-          <select>
+          <select name="sports_game">
             <option value="cricket">Cricket</option>
             <option value="football">Football</option>
             <option value="basketball">Basketball</option>
@@ -110,7 +117,7 @@
 
         <div id="esports-section" style="display: none">
           <label>Select Your E-Sports Game:</label>
-          <select>
+          <select name="esports_game">
             <option value="counter_strike">Counter-Strike</option>
             <option value="dota_2">Dota 2</option>
             <option value="league_of_legends">League of Legends</option>
@@ -123,47 +130,47 @@
         </div>
 
         <label>Tournament Name:</label>
-        <input type="text" placeholder="Enter Tournament Name" required />
+        <input type="text" name="tournament_name" required />
 
         <label>Tournament Level:</label>
-        <select>
-          <option value="">District level</option>
-          <option value="">States level</option>
-          <option value="">National level</option>
-          <option value="">School or University level</option>
+        <select name="tournament_level">
+          <option value="district">District level</option>
+          <option value="state">State level</option>
+          <option value="national">National level</option>
+          <option value="school">School or University level</option>
         </select>
 
         <label>Name of Head Organizer:</label>
-        <input type="text" placeholder="Enter Name" required />
+        <input type="text" name="organizer_name" required />
 
         <label>Phone Number:</label>
-        <input type="text" placeholder="Enter Phone Number" required />
+        <input type="text" name="phone_number" required />
 
         <label>Venue Name:</label>
-        <input type="text" placeholder="Enter Ground Name" required />
+        <input type="text" name="venue_name" required />
 
         <label>Number of Participating Teams:</label>
-        <input type="number" placeholder="Enter Number" required />
+        <input type="number" name="num_teams" required />
 
-        <label>Number of Participating Indivisuals:</label>
-        <input type="number" placeholder="Enter Number" required />
+        <label>Number of Participating Individuals:</label>
+        <input type="number" name="num_individuals" required />
 
-        <h3 style="color: #e0e0ff">Address of Tournament</h3>
         <label>State:</label>
-        <input type="text" placeholder="Enter State" required />
+        <input type="text" name="state" required />
 
         <label>District:</label>
-        <input type="text" placeholder="Enter District" required />
+        <input type="text" name="district" required />
 
         <label>City:</label>
-        <input type="text" placeholder="Enter City" required />
+        <input type="text" name="city" required />
 
         <label>Upload Tournament Poster:</label>
-        <input type="file" accept="image/*" required />
+        <input type="file" name="tournament_poster" accept="image/*" required />
 
         <h3 style="color: #e0e0ff">Tournament Facilities</h3>
+
         <label>Stay/Living:</label>
-        <select>
+        <select name="stay_facility">
           <option value="match_time">Only Match Time</option>
           <option value="team_performance">
             According to Team Performance
@@ -171,46 +178,59 @@
         </select>
 
         <label>Food:</label>
-        <select>
+        <select name="food_facility">
           <option value="drinks_breakfast">Only Drinks/Breakfast</option>
           <option value="lunch">Only Lunch</option>
           <option value="dinner">Only Dinner</option>
           <option value="both">Lunch and Dinner</option>
-          <option value="Not provided">Not provided</option>
+          <option value="not_provided">Not provided</option>
         </select>
 
         <label>Traveling Charge:</label>
-        <select>
+        <select name="travel_charge">
           <option value="one_side">One Side</option>
           <option value="both_side">Both Sides</option>
-          <option value="Not provided">Not provided</option>
+          <option value="not_provided">Not provided</option>
         </select>
 
         <label>Team Dress:</label>
-        <select>
+        <select name="team_dress">
           <option value="only_tshirt">Only T-Shirt</option>
           <option value="tshirt_lower">Both Lower & T-Shirt</option>
-          <option value="Not provided">Not provided</option>
+          <option value="not_provided">Not provided</option>
         </select>
 
         <label>Entry Fee:</label>
-        <select id="entry-fee" onchange="toggleEntryFeeInput()">
+        <select
+          id="entry-fee"
+          name="entry_fee"
+          onchange="toggleEntryFeeInput()"
+          required
+        >
+          <option value="">Select</option>
           <option value="no">No</option>
           <option value="yes">Yes</option>
         </select>
         <input
           type="number"
           id="entry-fee-amount"
+          name="entry_fee_amount"
           placeholder="Enter Amount"
           style="display: none"
         />
 
         <label>Age Limit:</label>
-        <select id="age-limit" onchange="toggleAgeCategory()">
+        <select
+          id="age-limit"
+          name="age_limit"
+          onchange="toggleAgeCategory()"
+          required
+        >
+          <option value="">Select</option>
           <option value="no">No</option>
           <option value="yes">Yes</option>
         </select>
-        <select id="age-category" style="display: none">
+        <select id="age-category" name="age_category" style="display: none">
           <option value="under_14">Under 14</option>
           <option value="under_16">Under 16</option>
           <option value="under_19">Under 19</option>
@@ -218,56 +238,122 @@
         </select>
 
         <h3 style="color: #e0e0ff">Compulsory Details</h3>
+
         <label>Upload Last Year Winner & Runner Team Image:</label>
-        <input type="file" accept="image/*" required />
+        <input
+          type="file"
+          name="winner_runner_image"
+          accept="image/*"
+          required
+        />
 
         <label>Upload Ground Image:</label>
-        <input type="file" accept="image/*" required />
+        <input type="file" name="ground_image" accept="image/*" required />
 
         <label>Upload Tournament Video:</label>
-        <input type="file" accept="video/*" required />
+        <input type="file" name="tournament_video" accept="video/*" required />
 
         <label>Team Entry:</label>
-        <select>
-          <option value="">Direct Entry</option>
-          <option value="">On the trial basis</option>
+        <select name="team_entry">
+          <option value="direct">Direct Entry</option>
+          <option value="trial">On the trial basis</option>
         </select>
 
         <button type="submit">Submit Registration</button>
       </form>
     </div>
 
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Logo & About -->
+        <div class="footer-section logo-section">
+          <h2>Khel-Xpress</h2>
+          <p>Where gamers connect, compete, and conquer!</p>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Tournaments</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <p>Subscribe for the latest gaming news & updates.</p>
+          <form action="#" class="newsletter" id="subscribeForm">
+            {% csrf_token %}
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+            <button type="submit">Subscribe</button>
+            <p id="email-error"></p>
+          </form>
+        </div>
+
+        <!-- Social Media & App Links -->
+        <div class="footer-section social-media">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#" class="icon fb">F</a>
+            <a href="#" class="icon ig">I</a>
+            <a href="#" class="icon tw">T</a>
+            <a href="#" class="icon yt">Y</a>
+          </div>
+          <h3>Get the App</h3>
+          <div class="app-buttons">
+            <a href="#" class="app-button">📱 App Store</a>
+            <a href="#" class="app-button">📱 Google Play</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <p class="footer-bottom">© 2025 Khel-Xpress. All rights reserved.</p>
+    </footer>
+
     <script>
       function toggleGameOptions() {
-        var type = document.getElementById("type").value;
-        var sportsSection = document.getElementById("sports-section");
-        var esportsSection = document.getElementById("esports-section");
-
-        if (type === "sports") {
-          sportsSection.style.display = "block";
-          esportsSection.style.display = "none";
-        } else if (type === "esports") {
-          sportsSection.style.display = "none";
-          esportsSection.style.display = "block";
-        } else {
-          sportsSection.style.display = "none";
-          esportsSection.style.display = "none";
-        }
+        const type = document.getElementById("type").value;
+        document.getElementById("sports-section").style.display =
+          type === "sports" ? "block" : "none";
+        document.getElementById("esports-section").style.display =
+          type === "esports" ? "block" : "none";
       }
 
       function toggleEntryFeeInput() {
-        var entryFee = document.getElementById("entry-fee").value;
-        document.getElementById("entry-fee-amount").style.display =
-          entryFee === "yes" ? "block" : "none";
+        const fee = document.getElementById("entry-fee").value;
+        const feeInput = document.getElementById("entry-fee-amount");
+        feeInput.style.display = fee === "yes" ? "block" : "none";
+        if (fee !== "yes") feeInput.value = "";
       }
 
       function toggleAgeCategory() {
-        document.getElementById("age-category").style.display =
-          document.getElementById("age-limit").value === "yes"
-            ? "block"
-            : "none";
+        const age = document.getElementById("age-limit").value;
+        const ageCat = document.getElementById("age-category");
+        ageCat.style.display = age === "yes" ? "block" : "none";
+        if (age !== "yes") ageCat.selectedIndex = 0;
       }
     </script>
+
     <script>
       function showSidebar() {
         let sidebar = document.querySelector(".sidebar");
@@ -278,6 +364,46 @@
         let sidebar = document.querySelector(".sidebar");
         sidebar.classList.remove("show-sidebar"); // Removes the class to hide it
       }
+    </script>
+    <script>
+      document
+        .querySelector(".newsletter")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          let email = document.querySelector("#email").value;
+          let errorText = document.querySelector("#email-error");
+          let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          let csrfToken = document.querySelector(
+            "[name=csrfmiddlewaretoken]"
+          ).value;
+
+          if (!emailPattern.test(email)) {
+            errorText.textContent = "Please enter a valid email address!";
+            errorText.style.color = "red";
+            return;
+          } else {
+            errorText.textContent = "";
+          }
+
+          try {
+            const response = await fetch("{% url 'subscribe' %}", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+              },
+              body: JSON.stringify({ email: email }),
+            });
+
+            const data = await response.json();
+            errorText.textContent = data.message;
+            errorText.style.color = response.ok ? "green" : "red";
+          } catch (error) {
+            errorText.textContent = "Error: Could not subscribe.";
+            errorText.style.color = "red";
+          }
+        });
     </script>
   </body>
 </html>

@@ -18,6 +18,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from khelxpress.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 import khelxpress.views as views
@@ -31,7 +33,12 @@ urlpatterns = [
     path('organize/', organize_view, name='organize'),
     path("subscribe/", subscribe, name="subscribe"),
     path('api/', include('locations.urls')),
+    path('tournaments/', include('tournaments.urls')),
 
       
     
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

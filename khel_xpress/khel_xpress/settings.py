@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'khelxpress',
     'locations',
+    'tournaments',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "sujalstark12345@gmail.com"  # Your email
 EMAIL_HOST_PASSWORD = "xnrh yctg xprn hdwq"  # Use App Password for security
 
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
