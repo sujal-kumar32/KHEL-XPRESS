@@ -771,9 +771,8 @@ nav ul .log-button:hover {
   display: grid;
   grid-template-columns: repeat(10, minmax(250px, 1fr));
   gap: 30px;
-
   margin-top: 20px;
-  max-width: 100%; /* Fixed width issue */
+  max-width: 100%;
 }
 
 /* News & Event Box Style */
@@ -794,26 +793,48 @@ nav ul .log-button:hover {
   justify-content: center;
   background-color: #0d0d15;
   color: #d7d7d8;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Mini box (hidden by default) */
+.mini-box {
+  position: absolute;
+  bottom: -100%;
+  width: 100%;
+  background-color: rgba(16, 16, 16, 0.9);
+  color: #d7d7d8;
+  padding: 10px;
+  border-radius: 10px 10px 0 0; /* Rounded top corners */
+  text-align: center;
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+  opacity: 0; /* Initially hidden */
+  z-index: 1;
+}
+
+/* Mini box content */
+.mini-box-content {
+  font-size: 1rem;
 }
 
 /* Hover Effect */
-.news-box:hover,
-.event-box:hover {
+.news-box:hover {
   transform: scale(1.05);
 }
+
+.news-box:hover .mini-box {
+  bottom: 0;
+  opacity: 1;
+}
+
 #sportsNewsHeading,
 #sportsEventHeading,
 #esportsNewsHeading,
 #esportsEventHeading {
   font-size: 26px;
   font-weight: bold;
-
   color: #ff435c;
 }
-
-/* Scroll Buttons (Right Side) */
-
-/* Buttons Style */
 
 /* Responsive Design */
 @media (max-width: 768px) {

@@ -35,13 +35,6 @@ class Tournament(models.Model):
         ('school', 'School or University level'),
     ]
 
-    FACILITY_DEFAULTS = {
-        'stay_facility': 'match_time',
-        'food_facility': 'not_provided',
-        'travel_charge': 'not_provided',
-        'team_dress': 'not_provided',
-    }
-
     AGE_CATEGORY_CHOICES = [
         ('under_14', 'Under 14'),
         ('under_16', 'Under 16'),
@@ -54,6 +47,17 @@ class Tournament(models.Model):
         ('trial', 'On the trial basis'),
     ]
 
+    GENDER_CATEGORY_CHOICES = [
+        ('mixed', 'Mixed'),
+        ('male', 'Male'),
+        ('female', 'Female'),
+    ]
+
+    PARTICIPANT_TYPE_CHOICES = [
+        ('teams', 'Teams'),
+        ('individuals', 'Individuals'),
+    ]
+
     game_type = models.CharField(max_length=20, choices=GAME_TYPE_CHOICES)
     sports_game = models.CharField(max_length=50, choices=SPORTS_CHOICES, null=True, blank=True)
     esports_game = models.CharField(max_length=50, choices=ESPORTS_CHOICES, null=True, blank=True)
@@ -64,11 +68,13 @@ class Tournament(models.Model):
     phone_number = models.CharField(max_length=15)
 
     venue_name = models.CharField(max_length=100)
-    num_teams = models.IntegerField()
-    num_individuals = models.IntegerField()
+    num_teams = models.IntegerField(null=True, blank=True)
+    num_individuals = models.IntegerField(null=True, blank=True)
 
-    state = models.CharField(max_length=50)
-    district = models.CharField(max_length=50)
+    state_id = models.IntegerField(default=0)
+    state_name = models.CharField(max_length=100, default='Unknown')
+    district_id = models.IntegerField(default=0)
+    district_name = models.CharField(max_length=100, default='Unknown')
     city = models.CharField(max_length=50)
 
     tournament_poster = models.ImageField(upload_to='tournament_posters/', null=True, blank=True)
@@ -90,5 +96,43 @@ class Tournament(models.Model):
 
     team_entry = models.CharField(max_length=20, choices=TEAM_ENTRY_CHOICES, default='direct')
 
+    prize_pool_available = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
+    prize_pool = models.PositiveIntegerField(null=True, blank=True)
+
+    participant_type = models.CharField(max_length=20, choices=PARTICIPANT_TYPE_CHOICES, null=True, blank=True)
+    gender_category = models.CharField(max_length=10, choices=GENDER_CATEGORY_CHOICES, default='mixed')
+    rules_document = models.FileField(upload_to='rules_documents/', null=True, blank=True)
+    winner_prize = models.TextField(null=True, blank=True)
+    runner_prize = models.TextField(null=True, blank=True)
+    player_tournament = models.TextField(null=True, blank=True)
+    player_match = models.TextField(null=True, blank=True)
+    other_prizes = models.TextField(null=True, blank=True)
+
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    start_time = models.TimeField(null=True, blank=True)
+    registration_deadline = models.DateField(null=True, blank=True)
+
+    contact_email = models.EmailField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return self.tournament_name
+    
+
+
+
+class Registration(models.Model):
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    player_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    age = models.IntegerField()
+    gender = models.CharField(max_length=10, choices=[('male', 'Male'), ('female', 'Female'), ('other', 'Other')])
+    team_name = models.CharField(max_length=100, null=True, blank=True)
+    team_members = models.IntegerField(null=True, blank=True)
+    additional_info = models.TextField(null=True, blank=True)
+    registered_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.player_name} - {self.tournament.tournament_name}"

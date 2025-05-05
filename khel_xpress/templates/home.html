@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Author: suajl,sudipta,ritesh
+      content="Author: sujal,sudipta,ritesh
     about:main page of the website khelXPRESS where events and news will be shown"
     />
     <title>khelXPRESS</title>
@@ -68,8 +68,12 @@
           </ul>
           <ul>
             <li class="hideOnMobile"><a href="">Home</a></li>
-            <li class="hideOnMobile"><a href="">Tournaments</a></li>
-            <li class="hideOnMobile"><a href="">Sports</a></li>
+            <li class="hideOnMobile">
+              <a href="{% url 'play' %}">Tournaments</a>
+            </li>
+            <li class="hideOnMobile">
+              <a href="{% url 'profile' %}">Profile</a>
+            </li>
             <li class="hideOnMobile">
               <a
                 href="{% if request.user.is_authenticated %}{% url 'organize' %}{% else %}{% url 'login' %}{% endif %}"
@@ -204,14 +208,27 @@
       <h2 id="sportsEventHeading" style="display: none">SPORTS-EVENT</h2>
       <a
         class="link"
-        href="{% if request.user.is_authenticated %}#{% else %}{% url 'login' %}{% endif %}"
+        href="{% if request.user.is_authenticated %}{% url 'play' %}{% else %}{% url 'login' %}{% endif %}"
       >
         <div id="sportsEvent" class="event-container" style="display: none">
-          <div class="event-box">🏏 Cricket League Announced!</div>
-          <div class="event-box">⚽ Football Tournament: Register Now!</div>
-          <div class="event-box">🏀 Basketball Championship Upcoming</div>
-          <div class="event-box">🎾 Tennis Open Championship: Get Ready</div>
-          <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+          {% for tournament in sports_tournaments %}
+          <div class="news-box">
+            <img
+              src="{{ tournament.tournament_poster.url }}"
+              alt="{{ tournament.tournament_name }}"
+              class="sportsNews-image"
+            />
+            <div class="mini-box">
+              <div class="mini-box-content">
+                <p><strong>{{ tournament.tournament_name }}</strong></p>
+                <p>{{ tournament.tournament_level }}</p>
+                <p>{{ tournament.prize_pool }}</p>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="event-box">No sports tournaments available.</div>
+          {% endfor %}
         </div>
       </a>
 
@@ -255,17 +272,29 @@
       <h2 id="esportsEventHeading" style="display: none">ESPORTS-EVENT</h2>
       <a
         class="link"
-        href="{% if request.user.is_authenticated %}#{% else %}{% url 'login' %}{% endif %}"
+        href="{% if request.user.is_authenticated %}{% url 'play' %}{% else %}{% url 'login' %}{% endif %}"
       >
         <div id="esportsEvent" class="event-container" style="display: none">
-          <div class="event-box">🏏 Cricket League Announced!</div>
-          <div class="event-box">⚽ Football Tournament: Register Now!</div>
-          <div class="event-box">🏀 Basketball Championship Upcoming</div>
-          <div class="event-box">🎾 Tennis Open Championship: Get Ready</div>
-          <div class="news-box">🎾 Tennis Open Championship: Get Ready</div>
+          {% for tournament in esports_tournaments %}
+          <div class="news-box">
+            <img
+              src="{{ tournament.tournament_poster.url }}"
+              alt="{{ tournament.tournament_name }}"
+              class="sportsNews-image"
+            />
+            <div class="mini-box">
+              <div class="mini-box-content">
+                <p><strong>{{ tournament.tournament_name }}</strong></p>
+                <p>{{ tournament.tournament_level }}</p>
+                <p>{{ tournament.prize_pool }}</p>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="event-box">No esports tournaments available.</div>
+          {% endfor %}
         </div>
       </a>
-
       <!-- Animated Separator -->
       <div class="animated-separator"></div>
 

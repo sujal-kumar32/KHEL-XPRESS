@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tournaments</title>
+    <link rel="stylesheet" href="{% static 'css/play.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <section>
+      <nav>
+        <div class="app_link">
+          <p>Hello {{request.user}}</p>
+        </div>
+        <div class="nav_items">
+          <ul class="sidebar">
+            <li onclick="hideSidebar()">
+              <a href="#"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 -960 960 960"
+                  width="24px"
+                  fill="#e3e3e3"
+                >
+                  <path
+                    d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+                  /></svg
+              ></a>
+            </li>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="">Tournaments</a></li>
+            <li><a href="">Sports</a></li>
+            <li><a href="">Organize</a></li>
+          </ul>
+          <ul>
+            <li class="hideOnMobile"><a href="{% url 'home' %}">Home</a></li>
+            <li class="hideOnMobile">
+              <a href="{% url 'play' %}">Tournaments</a>
+            </li>
+            <li class="hideOnMobile">
+              <a href="{% url 'profile' %}">Profile</a>
+            </li>
+            <li class="hideOnMobile">
+              <a
+                href="{% if request.user.is_authenticated %}{% url 'organize' %}{% else %}{% url 'login' %}{% endif %}"
+                >Organize</a
+              >
+            </li>
+            {% if request.user.is_authenticated %}
+            <li class="log-button">
+              <a href="{% url 'logout' %}" class="auth-link">Logout</a>
+            </li>
+            {% else %}
+            <li class="log-button">
+              <a href="{% url 'login' %}" class="auth-link">Sign Up</a>
+            </li>
+            {% endif %}
+            <li onclick="showSidebar() " class="show-sidebar-icon">
+              <a href="#"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="30px"
+                  viewBox="0 -960 960 960"
+                  width="30px"
+                  fill="#e3e3e3"
+                >
+                  <path
+                    d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
+                  /></svg
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      {% comment %}
+      --------------------------------------------------------------------------------------
+      {% endcomment %}
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="image">
+              <div class="black">
+                <h1>cricket</h1>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+                  <i class="fa-regular fa-star"></i>
+                </div>
+                <p>
+                  Cricket is a popular bat-and-ball sport played between two
+                  teams, typically consisting of 11 players each. It is played
+                  on an oval-shaped field with a rectangular pitch in the
+                  center.
+                </p>
+                <div class="genre">
+                  <a href="#" class="category">Sport</a>
+                  <a href="#" class="category">Game</a>
+                  <a href="#" class="category"><span>Cricket</span></a>
+                </div>
+              </div>
+
+              <img
+                src="{% static 'images/vri.jpg' %}"
+                alt="Background image for Death on the Nile"
+              />
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="image">
+              <div class="black">
+                <h1>Football</h1>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+                  <i class="fa-regular fa-star"></i>
+                </div>
+                <p>
+                  Football, also known as soccer in some countries, is a team
+                  sport played between two teams of 11 players each. The
+                  objective is to score goals by getting the ball into the
+                  opposing team’s net.
+                </p>
+                <div class="genre">
+                  <a href="#" class="category">Sport</a>
+                  <a href="#" class="category">Game</a>
+                  <a href="#" class="category"><span>Football</span></a>
+                </div>
+              </div>
+
+              <img
+                src="{% static 'images/ron.jpg' %}"
+                alt="Background image for The Maze Runner"
+              />
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="image">
+              <div class="black">
+                <h1>Valorant</h1>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+                  <i class="fa-regular fa-star"></i>
+                </div>
+                <p>
+                  Valorant is a tactical first-person shooter (FPS) game
+                  developed by Riot Games. Players form two teams of five, with
+                  one team attacking and the other defending bomb sites. The
+                  game emphasizes strategy, team coordination, and precise
+                  gunplay.
+                </p>
+                <div class="genre">
+                  <a href="#" class="category">Esports</a>
+                  <a href="#" class="category">Multiplayer</a>
+                  <a href="#" class="category"><span>Strategy</span></a>
+                </div>
+              </div>
+
+              <img
+                src="{% static 'images/valo.jpg' %}"
+                alt="Background image for The Avengers"
+              />
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="image">
+              <div class="black">
+                <h1>Chess</h1>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+                  <i class="fa-regular fa-star"></i>
+                </div>
+                <p>
+                  Chess is a two-player strategy board game that's considered
+                  one of the most intellectual and classic games in the world.
+                  It’s played on an 8×8 grid of squares, alternating between
+                  light and dark colors.
+                </p>
+                <div class="genre">
+                  <a href="#" class="category">PlayChessOnline</a>
+                  <a href="#" class="category">ChessMove</a>
+                  <a href="#" class="category"><span>ChessTactics</span></a>
+                </div>
+              </div>
+
+              <img
+                src="{% static 'images/chess.jpg' %}"
+                alt="Background image for Fullmetal Alchemist: Final Transmutation"
+              />
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="image">
+              <div class="black">
+                <h1>Basketball</h1>
+                <div class="star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+                  <i class="fa-regular fa-star"></i>
+                </div>
+                <p>
+                  Basketball is a team sport played between two teams of five
+                  players each. The goal is to score points by shooting a ball
+                  through the opponent’s hoop (a netted rim mounted 10 feet high
+                  on a backboard).
+                </p>
+                <div class="genre">
+                  <a href="#" class="category">Dunking</a>
+                  <a href="#" class="category">Crossover</a>
+                  <a href="#" class="category"><span>Slam Dunk</span></a>
+                </div>
+              </div>
+
+              <img
+                src="{% static 'images/curry.jpg' %}"
+                alt="Background image for Apocalypto"
+                title="Background image for Apocalypto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <div class="second">
+      <div class="latest">
+        <h1>Upcoming Tournaments</h1>
+
+        <div class="box">
+          {% for tournament in mixed_tournaments %}
+          <div
+            class="card"
+            onclick="window.location.href='{% url 'tournament_detail' tournament.id %}'"
+          >
+            <div class="details">
+              <div class="left">
+                <p class="name">{{ tournament.tournament_name }}</p>
+                <div class="date_quality">
+                  <p class="date">{{ tournament.start_date }}</p>
+                </div>
+                <p class="category">
+                  {{ tournament.game_type|capfirst }}: {{
+                  tournament.sports_game|default:tournament.esports_game }}
+                </p>
+              </div>
+            </div>
+
+            <img
+              src="{{ tournament.tournament_poster.url }}"
+              alt="{{ tournament.tournament_name }} Poster"
+              title="{{ tournament.tournament_name }} Poster"
+            />
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="upcoming">
+      <div class="movies_box">
+        <h1>Upcoming Sports Tournaments</h1>
+
+        <div class="box">
+          {% for tournament in upcoming_sports %}
+          <div
+            class="card"
+            onclick="window.location.href='{% url 'tournament_detail' tournament.id %}'"
+          >
+            <div class="details">
+              <div class="left">
+                <p class="name">{{ tournament.tournament_name }}</p>
+                <div class="date_quality">
+                  <p class="date">{{ tournament.start_date }}</p>
+                </div>
+                <p class="category">
+                  {{ tournament.game_type|capfirst }}: {{ tournament.sports_game
+                  }}
+                </p>
+              </div>
+            </div>
+
+            <img
+              src="{{ tournament.tournament_poster.url }}"
+              alt="{{ tournament.tournament_name }} Poster"
+              title="{{ tournament.tournament_name }} Poster"
+            />
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="show">
+      <div class="tv_show">
+        <h1>Esports Tournaments</h1>
+        <div class="box">
+          {% for tournament in show_esports %}
+          <div
+            class="card"
+            onclick="window.location.href='{% url 'tournament_detail' tournament.id %}'"
+          >
+            <div class="details">
+              <div class="left">
+                <p class="name">{{ tournament.tournament_name }}</p>
+                <div class="date_quality">
+                  <p class="date">{{ tournament.start_date }}</p>
+                </div>
+                <p class="category">
+                  {{ tournament.game_type|capfirst }}: {{
+                  tournament.esports_game }}
+                </p>
+              </div>
+            </div>
+
+            <img
+              src="{{ tournament.tournament_poster.url }}"
+              alt="{{ tournament.tournament_name }} Poster"
+              title="{{ tournament.tournament_name }} Poster"
+            />
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Logo & About -->
+        <div class="footer-section logo-section">
+          <h2>Khel-Xpress</h2>
+          <p>Where gamers connect, compete, and conquer!</p>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Tournaments</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <p>Subscribe for the latest gaming news & updates.</p>
+          <form action="#" class="newsletter" id="subscribeForm">
+            {% csrf_token %}
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+            <button type="submit">Subscribe</button>
+            <p id="email-error"></p>
+          </form>
+        </div>
+
+        <!-- Social Media & App Links -->
+        <div class="footer-section social-media">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#" class="icon fb">F</a>
+            <a href="#" class="icon ig">I</a>
+            <a href="#" class="icon tw">T</a>
+            <a href="#" class="icon yt">Y</a>
+          </div>
+          <h3>Get the App</h3>
+          <div class="app-buttons">
+            <a href="#" class="app-button">📱 App Store</a>
+            <a href="#" class="app-button">📱 Google Play</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <p class="footer-bottom">© 2025 Khel-Xpress. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+    <script>
+      function showSidebar() {
+        let sidebar = document.querySelector(".sidebar");
+        sidebar.classList.add("show-sidebar"); // Adds the class to make it visible
+      }
+
+      function hideSidebar() {
+        let sidebar = document.querySelector(".sidebar");
+        sidebar.classList.remove("show-sidebar"); // Removes the class to hide it
+      }
+    </script>
+
+    <script>
+      document
+        .querySelector(".newsletter")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          let email = document.querySelector("#email").value;
+          let errorText = document.querySelector("#email-error");
+          let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          let csrfToken = document.querySelector(
+            "[name=csrfmiddlewaretoken]"
+          ).value;
+
+          if (!emailPattern.test(email)) {
+            errorText.textContent = "Please enter a valid email address!";
+            errorText.style.color = "red";
+            return;
+          } else {
+            errorText.textContent = "";
+          }
+
+          try {
+            const response = await fetch("{% url 'subscribe' %}", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+              },
+              body: JSON.stringify({ email: email }),
+            });
+
+            const data = await response.json();
+            errorText.textContent = data.message;
+            errorText.style.color = response.ok ? "green" : "red";
+          } catch (error) {
+            errorText.textContent = "Error: Could not subscribe.";
+            errorText.style.color = "red";
+          }
+        });
+    </script>
+  </body>
+</html>

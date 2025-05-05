@@ -1,0 +1,777 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+section {
+  width: 100%;
+  height: 100vh;
+  background: #171717;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #252542);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Nav bar styles */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; /* Make the navbar span the full width */
+  height: 70px;
+  padding: 0 20px; /* Add consistent padding */
+  background-color: #171717; /* Ensure the navbar has the same black background */
+  position: sticky; /* Make it stick to the top */
+  top: 0;
+  z-index: 1000; /* Ensure it stays above other elements */
+}
+
+nav .app_link p {
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+nav .nav_items ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+nav .nav_items ul li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+nav .nav_items ul li a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: aliceblue;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Animated underline effect */
+nav .nav_items ul li a:not(.auth-link)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: #ff435c;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+
+nav .nav_items ul li a:not(.auth-link):hover {
+  color: #ff435c;
+  transform: translateY(-3px);
+}
+
+nav .nav_items ul li a:not(.auth-link):hover::after {
+  width: 100%;
+}
+
+nav ul .log-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.4);
+  color: white;
+  width: 140px;
+  height: 40px;
+  font-weight: 500;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+nav ul .log-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.log-button .auth-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-decoration: none;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 200px;
+  z-index: 999;
+  background-color: rgba(255, 250, 250, 0.07);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+  display: none !important;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.show-sidebar {
+  display: flex !important;
+}
+
+.sidebar li {
+  width: 100%;
+}
+
+.sidebar a {
+  width: 100%;
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .hideOnMobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+
+.show-sidebar-icon {
+  display: none !important;
+}
+
+@media (max-width: 800px) {
+  .show-sidebar-icon {
+    display: block !important;
+  }
+}
+
+.swiper {
+  width: 95%;
+  height: 85%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.swiper::selection {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide .image .black {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+}
+
+.swiper-slide .image .black h1 {
+  font-size: 30px;
+  text-align: left;
+  position: relative;
+  top: 60%;
+  left: 5%;
+  color: #fff;
+}
+
+.swiper-slide .image .black .star {
+  color: #ffd500;
+  text-align: left;
+  font-size: 16px;
+  margin: 10px 0;
+  position: relative;
+  top: 60%;
+  left: 5%;
+}
+
+.swiper-slide .image .black p {
+  width: 550px;
+  text-align: justify;
+  font-size: 16px;
+  color: #cccccc;
+  margin: 10px 0;
+  position: relative;
+  top: 60%;
+  left: 5%;
+  line-height: 23px;
+  font-family: "Ink Free";
+}
+
+.swiper-slide .image .black .genre {
+  text-align: left;
+  font-size: 16px;
+  margin: 13px 0;
+  position: relative;
+  top: 60%;
+  left: 5%;
+}
+
+.swiper-slide .image .black .genre a.category {
+  background: #282931;
+  text-decoration: none;
+  color: #cccccc;
+  padding: 2px 7px;
+}
+
+.swiper-slide .image .black .genre a.category span {
+  color: #ffe100;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*--------------*/
+
+/* Popular Tournaments Section */
+.second {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding-bottom: 25px;
+  background: #171717;
+}
+
+.second .latest {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.second .latest h1 {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.second .latest .box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align cards to the start */
+  flex-wrap: wrap;
+}
+
+.second .latest .box .card {
+  width: 260px;
+  height: 370px;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.second .latest .box .card .details {
+  width: 260px;
+  height: 370px;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 8px;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.second .latest .box .card:hover .details {
+  opacity: 1;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+}
+
+.second .latest .box .card .details .left {
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  transform: translateX(-100px);
+  transition: 0.4s;
+  opacity: 0;
+}
+
+.second .latest .box .card:hover .details .left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.second .latest .box .card .details .left p.name {
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.second .latest .box .card .details .left .date_quality {
+  display: flex;
+  align-items: center;
+}
+
+.second .latest .box .card .details .left .date_quality p.date {
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 10px;
+  margin-bottom: 8px;
+}
+
+.second .latest .box .card .details .left p.category {
+  margin-left: 10px;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.second .latest .box .card .details .left .info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.second .latest .box .card .details .left .info .rate {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.second .latest .box .card .details .left .info .rate p {
+  font-size: 12px;
+}
+
+.second .latest .box .card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Sports/Esports Section */
+/* Sports Section */
+.upcoming {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding-bottom: 25px;
+  background: #171717;
+}
+
+.upcoming .movies_box {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.upcoming .movies_box h1 {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.upcoming .movies_box .box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align cards to the start */
+  flex-wrap: wrap;
+}
+
+.upcoming .movies_box .box .card {
+  width: 250px;
+  height: 370px;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+}
+
+.upcoming .movies_box .box .card .details {
+  width: 250px;
+  height: 370px;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 8px;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.upcoming .movies_box .box .card:hover .details {
+  opacity: 1;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+}
+
+.upcoming .movies_box .box .card .details .left {
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  transform: translateX(-100px);
+  transition: 0.4s;
+  opacity: 0;
+}
+
+.upcoming .movies_box .box .card:hover .details .left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.upcoming .movies_box .box .card .details .left p.name {
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.upcoming .movies_box .box .card .details .left .date_quality {
+  display: flex;
+  align-items: center;
+}
+
+.upcoming .movies_box .box .card .details .left .date_quality p.date {
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 10px;
+  margin-bottom: 8px;
+}
+
+.upcoming .movies_box .box .card .details .left p.category {
+  margin-left: 10px;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.upcoming .movies_box .box .card .details .left .info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.upcoming .movies_box .box .card .details .left .info .rate {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.upcoming .movies_box .box .card .details .left .info .rate p {
+  font-size: 12px;
+}
+
+.upcoming .movies_box .box .card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Esports Section */
+.show {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding-bottom: 25px;
+  background: #171717;
+}
+
+.show .tv_show {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.show .tv_show h1 {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.show .tv_show .box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align cards to the start */
+  flex-wrap: wrap;
+}
+
+.show .tv_show .box .card {
+  width: 250px;
+  height: 370px;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+}
+
+.show .tv_show .box .card .details {
+  width: 250px;
+  height: 370px;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 8px;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.show .tv_show .box .card:hover .details {
+  opacity: 1;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+}
+
+.show .tv_show .box .card .details .left {
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  transform: translateX(-100px);
+  transition: 0.4s;
+  opacity: 0;
+}
+
+.show .tv_show .box .card:hover .details .left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.show .tv_show .box .card .details .left p.name {
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.show .tv_show .box .card .details .left .date_quality {
+  display: flex;
+  align-items: center;
+}
+
+.show .tv_show .box .card .details .left .date_quality p.date {
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 10px;
+  margin-bottom: 8px;
+}
+
+.show .tv_show .box .card .details .left p.category {
+  margin-left: 10px;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.show .tv_show .box .card .details .left .info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.show .tv_show .box .card .details .left .info .rate {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.show .tv_show .box .card .details .left .info .rate p {
+  font-size: 12px;
+}
+
+.show .tv_show .box .card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.footer {
+  background: linear-gradient(to right, #0f0f0f, #1a1a1a);
+  color: white;
+  padding: 40px 15px;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  width: 100%; /* Ensure full width */
+  align-self: stretch; /* Optional for flex children */
+  margin-top: 50px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1;
+  margin: 20px;
+  min-width: 200px;
+}
+
+.footer-section h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #ff4757;
+}
+
+.footer-section p {
+  font-size: 14px;
+  color: #bbb;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 8px 0;
+}
+
+.footer-section ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: white;
+}
+
+/* Newsletter */
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.newsletter input {
+  width: 80%;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.newsletter button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  background: #ff4757;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.newsletter button:hover {
+  background: #e84118;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.icon.fb:hover {
+  background-color: #1877f2;
+} /* Facebook */
+.icon.ig:hover {
+  background-color: #e4405f;
+} /* Instagram */
+.icon.tw:hover {
+  background-color: #1da1f2;
+} /* Twitter */
+.icon.yt:hover {
+  background-color: #ff0000;
+} /* YouTube */
+
+/* App Buttons */
+.app-buttons {
+  margin-top: 10px;
+}
+
+.app-button {
+  display: block;
+  padding: 8px 15px;
+  margin: 5px 0;
+  border-radius: 5px;
+  background-color: #222;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.app-button:hover {
+  background-color: #444;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  font-size: 14px;
+  margin-top: 20px;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

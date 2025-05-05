@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>khelXpress Profile Section</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- Emoji Picker -->
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.4/dist/index.min.js"></script>
+  </head>
+  <body>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <!-- Cover Section -->
+      <div class="profile-background">
+        <img
+          id="coverImage"
+          src="{% if user.profile.cover_picture %}{{ user.profile.cover_picture.url }}{% else %}{{ MEDIA_URL }}default_images/background.jpg{% endif %}"
+          alt="Cover Photo"
+          class="cover-photo"
+        />
+        <button
+          class="edit-cover-btn"
+          onclick="document.getElementById('coverInput').click()"
+          type="button"
+        >
+          <img
+            src="https://img.icons8.com/ios-filled/50/000000/camera.png"
+            alt="Camera icon"
+          />
+          Edit Cover Photo
+        </button>
+        <!-- Hidden input for cover picture -->
+        <input
+          type="file"
+          id="coverInput"
+          name="cover_picture"
+          accept="image/*"
+          hidden
+        />
+      </div>
+
+      <!-- Profile Picture Section -->
+      <div class="profile-picture-container">
+        <img
+          id="profileImage"
+          src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{{ MEDIA_URL }}default_images/profile.jpg{% endif %}"
+          alt="Profile Picture"
+          class="profile-picture"
+        />
+        <!-- Hidden input for profile picture -->
+        <input
+          type="file"
+          id="profileInput"
+          name="profile_picture"
+          accept="image/*"
+          hidden
+        />
+      </div>
+
+      <!-- Save Changes Button -->
+      <button type="submit" class="save-btn">Save Changes</button>
+    </form>
+
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <h1>Sujal Kumar</h1>
+        <div class="friends-count">97 friends</div>
+      </div>
+      <div class="action-buttons">
+        <button class="action-button primary-button">+ Add to story</button>
+        <!-- Edit Profile Button is now only for profile picture -->
+        <button
+          class="action-button secondary-button"
+          onclick="document.getElementById('profileInput').click();"
+        >
+          Edit profile
+        </button>
+      </div>
+
+      <!-- Form for uploading new images -->
+
+      <nav>
+        <ul class="nav-tabs">
+          <li class="nav-item">Posts</li>
+          <li class="nav-item">About</li>
+          <li class="nav-item">Friends</li>
+          <li class="nav-item">Photos</li>
+          <li class="nav-item">Videos</li>
+          <li class="nav-item">Check-ins</li>
+          <li class="nav-item more-dropdown">More</li>
+        </ul>
+      </nav>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <div class="page-layout">
+      <!-- LEFT SIDE (main content) -->
+      <div class="left-side">
+        <div class="post-box">
+          <div class="user-input">
+            <img src="{% static 'images/profile.jpg' %}" alt="User Avatar" />
+            <input type="text" placeholder="What's on your mind?" />
+          </div>
+          <div class="actions">
+            <div class="action-btn">
+              <img
+                src="https://img.icons8.com/color/48/000000/video-call.png"
+                alt="Live video"
+              />
+              Live video
+            </div>
+            <div class="action-btn">
+              <img
+                src="https://img.icons8.com/color/48/000000/image.png"
+                alt="Photo/video"
+              />
+              Photo/video
+            </div>
+            <div class="action-btn">
+              <img
+                src="https://img.icons8.com/color/48/000000/flag.png"
+                alt="Life event"
+              />
+              Life event
+            </div>
+          </div>
+        </div>
+        <!-- You can add more sections here later like a feed, stories, etc -->
+        <div class="kx-post">
+          <!-- Header -->
+          <div class="kx-header">
+            <img src="{% static 'images/profile.jpg' %}" alt="User profile" />
+            <div class="kx-user">
+              <span class="kx-user-name">Sujal Kumar</span>
+              <span class="kx-user-time">22 August 2022 &#183; 🌐</span>
+            </div>
+          </div>
+
+          <!-- Post Text -->
+          <div class="kx-content">
+            5th Anniversary@2BB1222 – <strong>DARK PAIN</strong> has sent you a
+            codeword. Use it to complete the Codeword Mission in the
+            Time-limited Diamond Shop to claim rewards!
+          </div>
+
+          <!-- Image -->
+          <img
+            src="{% static 'images/profile.jpg' %}"
+            alt="Codeword Image"
+            class="kx-image"
+          />
+
+          <!-- Actions -->
+          <div class="kx-actions">
+            <span>👍 Like</span>
+            <span>💬 Comment</span>
+            <span>📤 Send</span>
+            <span>↗️ Share</span>
+          </div>
+
+          <!-- Comment Box -->
+          <div class="kx-comment-box">
+            <img src="{% static 'images/profile.jpg' %}" alt="Your profile" />
+            <input type="text" placeholder="Write a comment..." />
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE (sidebar content) -->
+      <div class="right-side">
+        <div class="photo-section">
+          <div class="photo-header">
+            <h3>Photos</h3>
+            <a href="#">See All Photos</a>
+          </div>
+          <div class="photo-grid">
+            <!-- Replace the src URLs with your image links or local paths -->
+            <img src="{% static 'images/background.jpg' %}" alt="Photo 1" />
+            <img src="{% static 'images/background.jpg' %}" alt="Photo 2" />
+            <img src="{% static 'images/background.jpg' %}" alt="Photo 3" />
+            <img src="{% static 'images/background.jpg' %}" alt="Photo 4" />
+            <img src="{% static 'images/background.jpg' %}" alt="Photo 5" />
+            <img src="{% static 'images/background.jpg' %}" alt="Photo 6" />
+            <img src="{% static 'images/background.jpg' %}" alt="Bird 1" />
+            <img src="{% static 'images/background.jpg' %}" alt="Bird 2" />
+            <img src="{% static 'images/background.jpg' %}" alt="Elephants" />
+          </div>
+        </div>
+        <!-- You can add more things here later like friends, events, ads, etc -->
+        <div class="friends-section">
+          <div class="friends-header">
+            <h3>Friends</h3>
+            <a href="#">See all friends</a>
+          </div>
+          <div class="friends-count">97 friends</div>
+
+          <div class="friends-grid">
+            <div class="friend-card">
+              <img src="{% static 'images/profile.jpg' %}" alt="Sumit Kumar" />
+              <div class="friend-name">Sumit Kumar</div>
+            </div>
+            <div class="friend-card">
+              <img src="{% static 'images/profile.jpg' %}" alt="Vikash Kumar" />
+              <div class="friend-name">Vikash Kumar</div>
+            </div>
+            <div class="friend-card">
+              <img src="{% static 'images/profile.jpg' %}" alt="Anand Rathor" />
+              <div class="friend-name">Anand Rathor</div>
+            </div>
+            <div class="friend-card">
+              <img src="{% static 'images/profile.jpg' %}" alt="Vikash Kumar" />
+              <div class="friend-name">Vikash Kumar</div>
+            </div>
+            <div class="friend-card">
+              <img src="{% static 'images/profile.jpg' %}" alt="Vikash Kumar" />
+              <div class="friend-name">Vikash Kumar</div>
+            </div>
+            <div class="friend-card">
+              <img src="{% static 'images/profile.jpg' %}" alt="Akshay Anand" />
+              <div class="friend-name">Akshay Anand</div>
+            </div>
+            <div class="friend-card">
+              <img src="{% static 'images/profile.jpg' %}" alt="Pritam Patel" />
+              <div class="friend-name">Pritam Patel</div>
+            </div>
+            <div class="friend-card">
+              <img src="{% static 'images/profile.jpg' %}" alt="Vikash Kumar" />
+              <div class="friend-name">Vikash Kumar</div>
+            </div>
+            <div class="friend-card">
+              <img src="{% static 'images/profile.jpg' %}" alt="Manoj Kumar" />
+              <div class="friend-name">Manoj Kumar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ----------------------------------------------------------------------------------- -->
+
+    <div class="post-modal hidden">
+      <div class="post-modal">
+        <div class="modal-header">
+          <h2>Create post</h2>
+          <button class="close-btn">✕</button>
+        </div>
+
+        <div class="user-info">
+          <img
+            src="{% static 'images/profile.jpg' %}"
+            alt="User"
+            class="user-avatar"
+          />
+          <div>
+            <strong>Sujal Kumar</strong><br />
+            <button class="privacy-btn">
+              <i class="fas fa-lock"></i> Specific friends ▾
+            </button>
+          </div>
+        </div>
+
+        <textarea
+          class="post-textarea"
+          id="postText"
+          placeholder="What's on your mind?"
+        ></textarea>
+
+        <div class="upload-box" id="uploadBox">
+          <input type="file" id="fileInput" accept="image/*" hidden />
+          <label for="fileInput" class="upload-label">
+            <i class="fas fa-plus"></i><br />
+            <span>Add photos/videos</span>
+            <p class="upload-subtext">or drag and drop</p>
+          </label>
+          <img
+            id="previewImage"
+            class="preview-image"
+            alt="Preview of uploaded image"
+          />
+          <button class="upload-close" id="removeImage">✕</button>
+        </div>
+
+        <div class="add-to-post">
+          <span>Add to your post</span>
+          <div class="post-options">
+            <button
+              title="Add photo"
+              onclick="document.getElementById('fileInput').click()"
+            >
+              <i class="fas fa-image"></i>
+            </button>
+            <button title="Tag friends"><i class="fas fa-user-tag"></i></button>
+            <button title="Feeling" id="emojiBtn">
+              <i class="far fa-smile"></i>
+            </button>
+            <button title="Location">
+              <i class="fas fa-map-marker-alt"></i>
+            </button>
+            <button title="GIF"><i class="fas fa-file-video"></i></button>
+            <button title="More"><i class="fas fa-ellipsis-h"></i></button>
+          </div>
+        </div>
+
+        <button class="post-btn" id="postBtn" disabled>Post</button>
+      </div>
+
+      <!-- Modal content (already done by you) -->
+    </div>
+    <script src="{% static 'js/profile.js' %}"></script>
+  </body>
+</html>

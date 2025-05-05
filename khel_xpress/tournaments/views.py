@@ -3,9 +3,25 @@ from django.contrib import messages
 from .forms import TournamentForm
 from .models import Tournament
 
+
 def register_tournament(request):
     if request.method == 'POST':
         post_data = request.POST.copy()  # Make the POST data mutable
+        state_id = request.POST.get("state_id")
+        state_name = request.POST.get("state_name")
+        district_id = request.POST.get("district_id")
+        district_name = request.POST.get("district_name")
+        
+
+        # Save the data to the database
+        Tournament.objects.create(
+            state_id=state_id,
+            state_name=state_name,
+            district_id=district_id,
+            district_name=district_name,
+            
+            # Add other fields as needed
+        )
 
         game_type = post_data.get('game_type')
 
@@ -26,11 +42,3 @@ def register_tournament(request):
 
 
 
-def home(request):
-    sports_tournaments = Tournament.objects.filter(game_type='sports').order_by('-id')
-    esports_tournaments = Tournament.objects.filter(game_type='esports').order_by('-id')
-
-    return render(request, 'home.html', {
-        'sports_tournaments': sports_tournaments,
-        'esports_tournaments': esports_tournaments,
-    })

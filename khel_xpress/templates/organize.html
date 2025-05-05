@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Author: suajl,sudipta,ritesh
+      content="Author: sujal,sudipta,ritesh
     about:main page of the website khelXPRESS where events and news will be shown"
     />
     <link rel="icon" href="{% static 'images/Black.png' %}" />
@@ -48,8 +48,8 @@
       </ul>
       <ul>
         <li class="hideOnMobile"><a href="{% url 'home' %}">Home</a></li>
-        <li class="hideOnMobile"><a href="">Tournaments</a></li>
-        <li class="hideOnMobile"><a href="">Sports</a></li>
+        <li class="hideOnMobile"><a href="{% url 'play' %}">Tournaments</a></li>
+        <li class="hideOnMobile"><a href="{% url 'profile' %}">Profile</a></li>
         <li class="hideOnMobile">
           <a
             href="{% if request.user.is_authenticated %}{% url 'organize' %}{% else %}{% url 'login' %}{% endif %}"
@@ -83,7 +83,7 @@
     </div>
   </nav>
 
-  <body>
+  <>
     <div class="container">
       <h2>Tournament Registration Form</h2>
       <form method="POST" enctype="multipart/form-data">
@@ -144,22 +144,62 @@
         <input type="text" name="organizer_name" required />
 
         <label>Phone Number:</label>
-        <input type="text" name="phone_number" required />
+        <input type="tel" name="phone_number" pattern="[0-9]{10}" required />
 
         <label>Venue Name:</label>
         <input type="text" name="venue_name" required />
 
-        <label>Number of Participating Teams:</label>
-        <input type="number" name="num_teams" required />
+        <label for="participant_type">Participation Type:</label>
+        <select
+          name="participant_type"
+          id="participant_type"
+          onchange="toggleParticipantFields()"
+        >
+          <option value="">-- Select --</option>
+          <option value="teams">Teams</option>
+          <option value="individuals">Individuals</option>
+        </select>
 
-        <label>Number of Participating Individuals:</label>
-        <input type="number" name="num_individuals" required />
+        <!-- Teams Input -->
+        <div id="teams_input" style="display: none">
+          <label for="num_teams">Number of Participating Teams:</label>
+          <input type="number" name="num_teams" id="num_teams" min="1" />
+        </div>
 
-        <label>State:</label>
-        <input type="text" name="state" required />
+        <!-- Individuals Input -->
+        <div id="individuals_input" style="display: none">
+          <label for="num_individuals"
+            >Number of Participating Individuals:</label
+          >
+          <input
+            type="number"
+            name="num_individuals"
+            id="num_individuals"
+            min="1"
+          />
+        </div>
 
-        <label>District:</label>
-        <input type="text" name="district" required />
+        <label for="gender_category">Gender Category:</label>
+        <select name="gender_category" id="gender_category">
+          <option value="mixed" selected>Mixed</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+
+        <label for="state">State:</label>
+        <select id="state-select" name="state_id" required>
+          <option value="" disabled selected>Select State</option>
+        </select>
+        <!-- Hidden field to store the state name -->
+        <input type="hidden" id="state-name" name="state_name" />
+        
+        <label for="district">District:</label>
+        <select id="district" name="district_id" required>
+          <option value="" disabled selected>Select District</option>
+        </select>
+        <!-- Hidden field to store the district name -->
+        <input type="hidden" id="district-name" name="district_name" />
+
 
         <label>City:</label>
         <input type="text" name="city" required />
@@ -253,11 +293,102 @@
         <label>Upload Tournament Video:</label>
         <input type="file" name="tournament_video" accept="video/*" required />
 
+        <label for="rules_document">Upload Rules Document (PDF, DOCX):</label>
+        <input
+          type="file"
+          name="rules_document"
+          id="rules_document"
+          accept=".pdf,.doc,.docx"
+        />
+
         <label>Team Entry:</label>
         <select name="team_entry">
           <option value="direct">Direct Entry</option>
           <option value="trial">On the trial basis</option>
         </select>
+
+        <h3 style="color: #e0e0ff">Schedule Details</h3>
+        <label for="start_date">Start Date:</label>
+        <input type="date" name="start_date" id="start_date" required />
+
+        <label for="end_date">End Date:</label>
+        <input type="date" name="end_date" id="end_date" required />
+
+        <label for="start_time">Start Time:</label>
+        <input type="time" name="start_time" id="start_time" />
+
+        <label for="registration_deadline">Registration Deadline:</label>
+        <input
+          type="date"
+          name="registration_deadline"
+          id="registration_deadline"
+          required
+        />
+
+        <label>Prize Pool Available:</label>
+<select
+  name="prize_pool_available"
+  id="prize_pool_available"
+  onchange="togglePrizeFields()"
+  required
+>
+  <option value="no">No</option>
+  <option value="yes">Yes</option>
+</select>
+
+<div id="prize_fields" style="display: none">
+  <label>Prize Pool (in ₹):</label>
+  <input
+    type="number"
+    name="prize_pool"
+    placeholder="Enter Prize Pool Amount"
+  />
+
+  <label>Winner Prize:</label>
+  <textarea
+    name="winner_prize"
+    placeholder="Describe winner prize..."
+  ></textarea>
+
+  <label>Runner Prize:</label>
+  <textarea
+    name="runner_prize"
+    placeholder="Describe runner prize..."
+  ></textarea>
+
+  <label>Player of the Tournament:</label>
+  <textarea
+    name="player_tournament"
+    placeholder="Describe player of the tournament..."
+  ></textarea>
+
+  <label>Player of the Match:</label>
+  <textarea
+    name="player_match"
+    placeholder="Describe player of the match..."
+  ></textarea>
+
+  <label>Other Prize:</label>
+  <textarea
+    name="other_prizes"
+    placeholder="Mention other prizes based on your tournament..."
+  ></textarea>
+</div>
+        <label for="contact_email">Contact Email:</label>
+        <input
+          type="email"
+          name="contact_email"
+          id="contact_email"
+          placeholder="example@domain.com"
+        />
+
+        <label for="description">Description:</label>
+        <textarea
+          name="description"
+          id="description"
+          rows="4"
+          placeholder="Enter tournament details..."
+        ></textarea>
 
         <button type="submit">Submit Registration</button>
       </form>
@@ -352,6 +483,14 @@
         ageCat.style.display = age === "yes" ? "block" : "none";
         if (age !== "yes") ageCat.selectedIndex = 0;
       }
+
+      function toggleParticipantFields() {
+        const type = document.getElementById("participant_type").value;
+        document.getElementById("teams_input").style.display =
+          type === "teams" ? "block" : "none";
+        document.getElementById("individuals_input").style.display =
+          type === "individuals" ? "block" : "none";
+      }
     </script>
 
     <script>
@@ -405,5 +544,92 @@
           }
         });
     </script>
+    <script>
+      function togglePrizeFields() {
+        const prizePoolAvailable = document.getElementById("prize_pool_available").value;
+        const prizeFields = document.getElementById("prize_fields");
+      
+        // Get all input and textarea fields inside the prize_fields section
+        const inputs = prizeFields.querySelectorAll("input, textarea");
+      
+        if (prizePoolAvailable === "yes") {
+          prizeFields.style.display = "block"; // Show prize fields
+          // Add the required attribute to all fields
+          inputs.forEach((input) => {
+            input.setAttribute("required", "required");
+          });
+        } else {
+          prizeFields.style.display = "none"; // Hide prize fields
+          // Remove the required attribute from all fields
+          inputs.forEach((input) => {
+            input.removeAttribute("required");
+          });
+        }
+      }
+    </script>
+    <script>
+      async function loadStates() {
+        let response = await fetch("/api/states/");
+        let states = await response.json();
+      
+        let stateSelect = document.getElementById("state-select");
+        stateSelect.innerHTML =
+          '<option value="" disabled selected>Select State</option>';
+      
+        states.forEach((state) => {
+          let option = document.createElement("option");
+          option.value = state.id; // Save the state ID
+          option.textContent = state.name; // Display the state name
+          option.setAttribute("data-name", state.name); // Store the state name as a data attribute
+          stateSelect.appendChild(option);
+        });
+      }
+      
+      async function loadDistricts() {
+        let stateId = document.getElementById("state-select").value;
+        let districtSelect = document.getElementById("district");
+        districtSelect.innerHTML =
+          '<option value="" disabled selected>Select District</option>';
+      
+        if (stateId) {
+          try {
+            let response = await fetch(`/api/districts/${stateId}/`);
+            if (!response.ok) {
+              console.error("Failed to fetch districts:", response.statusText);
+              return;
+            }
+            let districts = await response.json();
+      
+            districts.forEach((district) => {
+              let option = document.createElement("option");
+              option.value = district.id; // Save the district ID
+              option.textContent = district.name; // Display the district name
+              option.setAttribute("data-name", district.name); // Store the district name as a data attribute
+              districtSelect.appendChild(option);
+            });
+          } catch (error) {
+            console.error("Error fetching districts:", error);
+          }
+        }
+      }
+      
+      // Update hidden fields when state or district is selected
+      document.getElementById("state-select").addEventListener("change", function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const stateName = selectedOption.getAttribute("data-name");
+        document.getElementById("state-name").value = stateName; // Update hidden field
+        loadDistricts(); // Load districts for the selected state
+      });
+      
+      document.getElementById("district").addEventListener("change", function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const districtName = selectedOption.getAttribute("data-name");
+        document.getElementById("district-name").value = districtName; // Update hidden field
+      });
+      
+      document.addEventListener("DOMContentLoaded", function () {
+        loadStates();
+      });
+      </script>
   </body>
 </html>

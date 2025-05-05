@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ tournament.tournament_name }} - Tournament Details</title>
+    <link rel="stylesheet" href="{% static 'css/tournament_detail.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Tournament Poster -->
+      <div class="poster">
+        {% if tournament.tournament_poster %}
+        <img
+          src="{{ tournament.tournament_poster.url }}"
+          alt="{{ tournament.tournament_name }}"
+        />
+        {% else %}
+        <p>No Poster Available</p>
+        {% endif %}
+      </div>
+
+      <!-- Tournament Information -->
+      <div class="details">
+        <h1>{{ tournament.tournament_name }}</h1>
+        <p><strong>Organizer:</strong> {{ tournament.organizer_name }}</p>
+        <p>
+          <strong>Contact:</strong> {{ tournament.phone_number }} | 
+          {{ tournament.contact_email|default:"Not Provided" }}
+        </p>
+        <p>
+          <strong>Game Type:</strong> {{ tournament.get_game_type_display }}
+        </p>
+        <p>
+          <strong>Game:</strong>
+          {% if tournament.game_type == 'sports' %}
+            {{ tournament.get_sports_game_display|default:"Not Specified" }}
+          {% elif tournament.game_type == 'esports' %}
+            {{ tournament.get_esports_game_display|default:"Not Specified" }}
+          {% else %}
+            Not Specified
+          {% endif %}
+        </p>
+        <p>
+          <strong>Level:</strong> {{ tournament.get_tournament_level_display }}
+        </p>
+        <p>
+          <strong>Participant Type:</strong> {{ tournament.get_participant_type_display }}
+        </p>
+        <p>
+          <strong>Gender Category:</strong> {{ tournament.get_gender_category_display }}
+        </p>
+        <p>
+          <strong>Age Limit:</strong> 
+          {% if tournament.age_limit == 'yes' %}
+            {{ tournament.get_age_category_display|default:"Not Specified" }}
+          {% else %}
+            No Age Limit
+          {% endif %}
+        </p>
+      </div>
+
+      <!-- Registration Details -->
+      <div class="registration">
+        <h2>Registration Details</h2>
+        <p>
+          <strong>Entry Fee:</strong>
+          {% if tournament.entry_fee == 'yes' %}
+            ₹{{ tournament.entry_fee_amount|default:"0" }}
+          {% else %}
+            Free
+          {% endif %}
+        </p>
+        <p>
+          <strong>Registration Deadline:</strong> {{ tournament.registration_deadline|default:"Not Specified" }}
+        </p>
+        <p>
+          <strong>Team Entry:</strong> {{ tournament.get_team_entry_display }}
+        </p>
+        <p>
+          <strong>Number of Teams:</strong> {{ tournament.num_teams|default:"Not Specified" }}
+        </p>
+        <p>
+          <strong>Number of Individuals:</strong> {{ tournament.num_individuals|default:"Not Specified" }}
+        </p>
+      </div>
+
+      <!-- Venue Details -->
+      <div class="venue">
+        <h2>Venue Details</h2>
+        <p><strong>Venue Name:</strong> {{ tournament.venue_name }}</p>
+        <p>
+          <strong>Location:</strong> 
+          {{ tournament.city }}, {{ tournament.district }}, {{ tournament.state }}
+        </p>
+      </div>
+
+      <!-- Prize Details -->
+      <div class="prizes">
+        <h2>Prizes</h2>
+        {% if tournament.prize_pool_available == 'yes' %}
+        <p><strong>Total Prize Pool:</strong> ₹{{ tournament.prize_pool|default:"0" }}</p>
+        <p><strong>Winner Prize:</strong> {{ tournament.winner_prize|default:"Not Specified" }}</p>
+        <p><strong>Runner-Up Prize:</strong> {{ tournament.runner_prize|default:"Not Specified" }}</p>
+        <p><strong>Other Prizes:</strong> {{ tournament.other_prizes|default:"Not Specified" }}</p>
+        {% else %}
+        <p>No Prize Pool Available</p>
+        {% endif %}
+      </div>
+
+      <!-- Additional Information -->
+      <div class="additional-info">
+        <h2>Additional Information</h2>
+        <p><strong>Start Date:</strong> {{ tournament.start_date|default:"Not Specified" }}</p>
+        <p><strong>End Date:</strong> {{ tournament.end_date|default:"Not Specified" }}</p>
+        <p><strong>Start Time:</strong> {{ tournament.start_time|default:"Not Specified" }}</p>
+        <p><strong>Description:</strong> {{ tournament.description|default:"No Description Provided" }}</p>
+      </div>
+
+      <!-- Tournament Media -->
+      <!-- Tournament Media -->
+<div class="media">
+  <h2>Tournament Media</h2>
+  
+  {% if tournament.winner_runner_image %}
+  <div class="media-item">
+    <h3>Winner/Runner Image</h3>
+    <img
+      src="{{ tournament.winner_runner_image.url }}"
+      alt="Winner/Runner"
+      class="media-img"
+    />
+  </div>
+  {% endif %}
+  
+  {% if tournament.ground_image %}
+  <div class="media-item">
+    <h3>Ground Image</h3>
+    <img
+      src="{{ tournament.ground_image.url }}"
+      alt="Ground"
+      class="media-img"
+    />
+  </div>
+  {% endif %}
+  
+  {% if tournament.tournament_video %}
+  <div class="media-item">
+    <h3>Tournament Video</h3>
+    <video controls class="media-video">
+      <source src="{{ tournament.tournament_video.url }}" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  {% endif %}
+</div>
+      <!-- Accommodation and Facilities -->
+      <div class="facilities">
+        <h2>Facilities</h2>
+        <p><strong>Stay Facility:</strong> {{ tournament.stay_facility }}</p>
+        <p><strong>Food Facility:</strong> {{ tournament.food_facility }}</p>
+        <p><strong>Travel Charge:</strong> {{ tournament.travel_charge }}</p>
+        <p><strong>Team Dress:</strong> {{ tournament.team_dress }}</p>
+      </div>
+
+      <!-- Rules Document -->
+      <div class="rules">
+        <h2>Rules Document</h2>
+        {% if tournament.rules_document %}
+        <p>
+          <a href="{{ tournament.rules_document.url }}" target="_blank">Download Rules Document</a>
+        </p>
+        {% else %}
+        <p>No Rules Document Available</p>
+        {% endif %}
+      </div>
+
+      <!-- Register Button -->
+      <div class="register">
+        <h2>Register for Tournament</h2>
+        <a href="{% url 'register_tournament' tournament.id %}" class="btn">Register Now</a>
+      </div>
+    </div>
+  </body>
+</html>
