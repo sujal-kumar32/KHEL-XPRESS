@@ -37,6 +37,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profiles/', include('profiles.urls')), 
     path('play/', views.play_view, name='play'),
+    path('search/', views.search_tournaments, name='search_tournaments'),  # Add this line
     path('tournament/<int:tournament_id>/', views.tournament_detail, name='tournament_detail'),
     path('<int:tournament_id>/register/', views.register_tournament, name='register_tournament'),
     path('<int:tournament_id>/submit/', views.submit_registration, name='submit_registration'),

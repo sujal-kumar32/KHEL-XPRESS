@@ -112,12 +112,20 @@
         <h4>INDIA</h4>
         <h2>Find your <b>Passion</b> to win public <b>Emotions</b>.</h2>
         <div class="search_container">
-          <form>
-            <select name="state" id="state-select" onchange="loadDistricts()">
+          <form
+            method="GET"
+            action="{% url 'search_tournaments' %}"
+            onsubmit="showSearchResults(event)"
+          >
+            <select
+              name="state_id"
+              id="state-select"
+              onchange="loadDistricts()"
+              required
+            >
               <option value="" disabled selected>Select State</option>
             </select>
-
-            <select id="district">
+            <select name="district_id" id="district" required>
               <option value="" disabled selected>Select District</option>
             </select>
             <button type="submit" class="btn">
@@ -125,6 +133,35 @@
             </button>
           </form>
         </div>
+      
+        <!-- Search Results Section -->
+        <div
+          class="search-results"
+          id="search-results"
+          style="display: none; margin-top: 20px;"
+        >
+          <h2>Search Results</h2>
+          {% if tournaments %}
+          <ul class="styled-results">
+            {% for tournament in tournaments %}
+            <li>
+              <a href="{% url 'tournament_detail' tournament.id %}">
+                <div class="result-card">
+                  <h3>{{ tournament.tournament_name }}</h3>
+                  <p><b>City:</b> {{ tournament.city }}</p>
+                  <p><b>Level:</b> {{ tournament.tournament_level }}</p>
+                  <p><b>Prize Pool:</b> ₹{{ tournament.prize_pool }}</p>
+                </div>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>No tournaments found for the selected state and district.</p>
+          {% endif %}
+        </div>
+      </div>
+        
         <!-- Marquee Section (New Style) -->
         <div class="marquee_container">
           <marquee class="marquee_text">
@@ -604,6 +641,34 @@
             errorText.style.color = "red";
           }
         });
+    </script>
+    <script>
+      // Function to show search results without reloading the page
+    function showSearchResults(event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+    
+      const form = event.target;
+      const stateId = document.getElementById("state-select").value;
+      const districtId = document.getElementById("district").value;
+    
+      if (stateId && districtId) {
+        // Submit the form via AJAX
+        fetch(`${form.action}?state_id=${stateId}&district_id=${districtId}`)
+          .then((response) => response.text())
+          .then((html) => {
+            // Parse the response and update the search results
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            const results = doc.querySelector(".search-results").innerHTML;
+    
+            document.getElementById("search-results").innerHTML = results;
+            document.getElementById("search-results").style.display = "block";
+          })
+          .catch((error) => {
+            console.error("Error fetching search results:", error);
+          });
+      }
+    }
     </script>
   </body>
 </html>

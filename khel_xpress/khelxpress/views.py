@@ -20,6 +20,13 @@ from tournaments.models import Tournament, Registration
 def home(request):
     sports_tournaments = Tournament.objects.filter(game_type='sports').exclude(tournament_poster=None)
     esports_tournaments = Tournament.objects.filter(game_type='esports').exclude(tournament_poster=None)
+    state_id = request.GET.get('state_id')
+    district_id = request.GET.get('district_id')
+
+    tournaments = None
+    if state_id and district_id:
+        # Filter tournaments based on state and district
+        tournaments = Tournament.objects.filter(state_id=state_id, district_id=district_id)
     return render(request, 'home.html', {  'sports_tournaments': sports_tournaments,
         'esports_tournaments': esports_tournaments,})
 
@@ -191,3 +198,16 @@ def submit_registration(request, tournament_id):
         # Redirect to the home page
         return redirect('home')
     return redirect('register_tournament', tournament_id=tournament_id)
+
+
+
+def search_tournaments(request):
+    state_id = request.GET.get('state_id')
+    district_id = request.GET.get('district_id')
+
+    tournaments = None
+    if state_id and district_id:
+        # Filter tournaments based on state and district
+        tournaments = Tournament.objects.filter(state_id=state_id, district_id=district_id)
+
+    return render(request, 'home.html', {'tournaments': tournaments})
